@@ -6,13 +6,13 @@ body {
 }
 
 header {
-    background-color: #ff6200;
-    color: orange;
+    background-color: #15690c;
+    color: green;
     padding: 20px;
 }
 
 header nav a {
-    color: orange;
+    color: green;
     margin: 0 10px;
     text-decoration: none;
 }
@@ -27,7 +27,7 @@ footer {
     margin-top: 30px;
 }
 
-.carros {
+.masks {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -35,7 +35,7 @@ footer {
     margin-top: 20px;
 }
 
-.carros img {
+.masks img {
     width: 200px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
