@@ -1,14 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    color: #333;
     text-align: center;
 }
 
 header {
-    background-color: #114f0a;
-    color: green;
-    padding: 20px;
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3)
 }
 
 header nav a {
@@ -37,6 +41,12 @@ footer {
 
 .masks img {
     width: 200px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.masks img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4)
 }
