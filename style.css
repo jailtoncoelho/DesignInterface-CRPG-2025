@@ -1,73 +1,105 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+/* Estilo geral */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, arcade-classic;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #25014d, #af6ef5);
+    color: #0a0a0a;
+    text-align: center;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escolha de Inicial</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+/* Cabeçalho mais moderno */
+header {
+    background: linear-gradient(135deg, #5e0da1, #9b19d2);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
 
-<body>
+header h2 {
+    margin: 0;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
 
-    <!-- Cabeçalho -->
-    <header>
-        <h2>Pokemon IFPR</h2>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="regioes.html">Pokemon</a>
-            <a href="#">Região</a>
-        </nav>
-    </header>
+header nav {
+    margin-top: 10px;
+}
 
-    <!-- Conteúdo principal -->
-    <main>
-    <h1>Todas as Regiões</h1>
-    <div class="regioes">
-        <div class="regiao">
-            <h2>Região de Kanto</h2>
-            <p>1° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Johto</h2>
-            <p>2° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Sinnoh</h2>
-            <p>3° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Unova</h2>
-            <p>4° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Kalos</h2>
-            <p>5° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Alola</h2>
-            <p>6° Geração</p>
-          <div class="regiao">
-            <h2>Região de Galar</h2>
-            <p>7° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Hisui</h2>
-            <p>8° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Paldea</h2>
-            <p>9° Geração</p>
-        </div>
-        </div>
-    </div>
-</main
+header nav a {
+    display: inline-block;
+    color: #a308c9;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 Pokemon IFPR - Todos os direitos dos Pokemon!</p>
-    </footer>
+header nav a:hover {
+    background-color: #a308c9;
+    color: #0d47a1;
+}
 
-</body>
+/* Conteúdo principal */
+main {
+    padding: 20px;
+}
 
-</html>
+main h1 {
+    color: #080708;
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(135deg, #2d08ff, #5b40f5);
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #080708;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+}
+
+/* Galeria de carros */
+.pokemon {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.pokemon img {
+    width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pokemon img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+.regioes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.regiao {
+    background: linear-gradient(135deg, #9e9b9b, #ffffff);
+    border-radius: 12px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.regiao:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
