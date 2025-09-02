@@ -3,14 +3,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, arcade-classic;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    background: linear-gradient(to right, ffffff, #D3D6D8);
     color: #333;
     text-align: center;
 }
 
 /* Cabeçalho mais moderno */
 header {
-    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    background: linear-gradient(135deg, #F12626, bd0000);
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -29,7 +29,7 @@ header nav {
 
 header nav a {
     display: inline-block;
-    color: #ffeb3b;
+    color: #000000;
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
@@ -39,7 +39,7 @@ header nav a {
 }
 
 header nav a:hover {
-    background-color: #D68080;
+    background-color: #FFFFFF;
     color: #0d47a1;
 }
 
@@ -49,12 +49,12 @@ main {
 }
 
 main h1 {
-    color: #0d47a1;
+    color: #000000;
 }
 
 /* Rodapé */
 footer {
-    background-color: #eeeeee;
+    background-color: #000000;
     padding: 15px;
     margin-top: 30px;
     font-size: 0.9em;
@@ -92,7 +92,7 @@ footer {
 }
 
 .regiao {
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #DD2525, #FFFFFF);
     border-radius: 12px;
     padding: 20px;
     width: 250px;
