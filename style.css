@@ -1,6 +1,6 @@
 /* Estilo geral */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arcade Classic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, arcade-classic;
     margin: 0;
     padding: 0;
     background: linear-gradient(to right, #e3f2fd, #bbdefb);
@@ -63,7 +63,7 @@ footer {
 }
 
 /* Galeria de carros */
-.carros {
+.pokemon {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -71,7 +71,7 @@ footer {
     margin-top: 20px;
 }
 
-.carros img {
+.pokemon img {
     width: 200px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -79,6 +79,28 @@ footer {
 }
 
 .carros img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.regioes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.regiao {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.regiao:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(0,0,0,0.4);
 }
