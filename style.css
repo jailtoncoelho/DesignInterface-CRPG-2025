@@ -2,13 +2,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    background: linear-gradient(to right,#9fa0a1, #4b574e);
     color: #333;
     text-align: center;
 }
 
 header {
-    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    background: linear-gradient(135deg, #045e0b, #453006);
     color: white;
     padding: 20px 0;
     text-align: center;
