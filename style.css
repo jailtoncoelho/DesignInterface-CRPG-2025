@@ -16,6 +16,7 @@ header {
 
 header h2 {
   margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 
 header nav a {
@@ -26,7 +27,8 @@ header nav a {
   transition: color 0.3s;
 }
 
-header nav a:hover {
+header nav a:hover,
+header nav a.ativo {
   color: #ffcc00;
 }
 
@@ -38,6 +40,7 @@ main {
 
 main h1 {
   font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -59,7 +62,7 @@ main p {
   width: 250px;
   height: 160px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
 }
