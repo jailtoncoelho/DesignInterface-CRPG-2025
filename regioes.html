@@ -2,14 +2,95 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Escolha de Inicial</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilo geral da página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* Container das regiões com altura fixa e scroll */
+        .regioes {
+            height: 100vh; /* altura total da viewport */
+            overflow-y: auto; /* barra de scroll vertical */
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+
+        /* Cada região com altura fixa e estilo */
+        .regiao {
+            height: 100px; /* altura fixa para todas iguais */
+            background-color: white;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .regiao h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.3rem;
+            color: #222;
+        }
+
+        .regiao p {
+            margin: 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- Cabeçalho -->
     <header>
         <h2>Pokemon IFPR</h2>
@@ -22,52 +103,51 @@
 
     <!-- Conteúdo principal -->
     <main>
-    <h1>Todas as Regiões</h1>
-    <div class="regioes">
-        <div class="regiao">
-            <h2>Região de Kanto</h2>
-            <p>1° Geração</p>
+        <h1>Todas as Regiões</h1>
+        <div class="regioes">
+            <div class="regiao">
+                <h2>Região de Kanto</h2>
+                <p>1° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Johto</h2>
+                <p>2° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Sinnoh</h2>
+                <p>3° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Unova</h2>
+                <p>4° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Kalos</h2>
+                <p>5° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Alola</h2>
+                <p>6° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Galar</h2>
+                <p>7° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Hisui</h2>
+                <p>8° Geração</p>
+            </div>
+            <div class="regiao">
+                <h2>Região de Paldea</h2>
+                <p>9° Geração</p>
+            </div>
         </div>
-        <div class="regiao">
-            <h2>Região de Johto</h2>
-            <p>2° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Sinnoh</h2>
-            <p>3° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Unova</h2>
-            <p>4° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Kalos</h2>
-            <p>5° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Alola</h2>
-            <p>6° Geração</p>
-          <div class="regiao">
-            <h2>Região de Galar</h2>
-            <p>7° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Hisui</h2>
-            <p>8° Geração</p>
-        </div>
-        <div class="regiao">
-            <h2>Região de Paldea</h2>
-            <p>9° Geração</p>
-        </div>
-        </div>
-    </div>
-</main
+    </main>
 
     <!-- Rodapé -->
     <footer>
         <p>&copy; 2025 Pokemon IFPR - Todos os direitos dos Pokemon!</p>
     </footer>
-
 </body>
 
 </html>
