@@ -3,14 +3,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, arcade-classic;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, DF3939, #af6ef5);
+    background: linear-gradient(to right, #FFFFFF, #221F22);
     color: #0a0a0a;
     text-align: center;
 }
 
 /* Cabeçalho mais moderno */
 header {
-    background: linear-gradient(135deg, #080708, #221F22);
+    background: linear-gradient(135deg, #FF2424, #A00000);
     color: white;
     padding: 20px 0;
     text-align: center;
