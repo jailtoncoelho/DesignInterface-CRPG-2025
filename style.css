@@ -40,7 +40,7 @@ header nav a {
 
 header nav a:hover {
     background-color: #BB2828;
-    color: #0d47a1;
+    color: #000000;
 }
 
 /* Conteúdo principal */
@@ -49,12 +49,12 @@ main {
 }
 
 main h1 {
-    color: #080708;
+    color: #FFFFFF;
 }
 
 /* Rodapé */
 footer {
-    background: linear-gradient(135deg, #2d08ff, #5b40f5);
+    background: linear-gradient(135deg, #000000, #251F1F);
     padding: 15px;
     margin-top: 30px;
     font-size: 0.9em;
