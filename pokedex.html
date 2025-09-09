@@ -22,16 +22,10 @@
 
     <!-- Conteúdo principal -->
     <main>
-        <h1>Informações do Pokémon</h1>
-        <form class="contato-form">
+        <h1>Busca pelo Pokémon</h1>
+        <form class="contato-form" id="pokedex-form">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Digite o nome do Pokémon" required>
-
-            <label for="regiao">Região:</label>
-            <input type="regiao" id="regiao" name="regiao" placeholder="Digite a Região" required>
-
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="tipagem" name="tipagem" placeholder="Digite a Tipagem do Pokémon"></textarea>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome do Pokémon desejado" required>
 
             <button type="submit">Enviar</button>
         </form>
@@ -41,6 +35,25 @@
     <footer>
         <p>&copy; 2025 Pokémon IFPR - Todos os direitos dos Pokémon</p>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('pokedex-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o envio do formulário tradicional
+
+            // Captura o nome digitado, remove espaços extras e transforma em minúsculas
+            const nomePokemon = document.getElementById('nome').value.trim().toLowerCase();
+
+            // Se houver valor, redireciona para a página da National Dex
+            if (nomePokemon) {
+                // Redireciona para a URL oficial da pokedex
+                const url = `https://www.pokemon.com/br/pokedex/${nomePokemon}`;
+                window.location.href = url;
+            } else {
+                alert("Por favor, insira o nome de um Pokémon.");
+            }
+        });
+    </script>
 
 </body>
 
