@@ -3,80 +3,96 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  padding-top: 80px; /* espaço para header fixo */
+  line-height: 1.6;
 }
 
-/* Cabeçalho */
+/* Cabeçalho fixo */
 header {
-  background-color: #004080;
-  color: white;
-  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
   padding: 20px 0;
-}
-
-header h2 {
-  margin-bottom: 10px;
-  font-size: 1.8rem;
-}
-
-header nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-header nav a:hover,
-header nav a.ativo {
-  color: #ffcc00;
-}
-
-/* Conteúdo principal */
-main {
   text-align: center;
-  padding: 40px 20px;
+  z-index: 1000;
 }
 
-main h1 {
-  font-size: 2rem;
+/* Navegação */
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
   font-weight: bold;
-  margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
-main p {
-  margin-bottom: 30px;
-  font-size: 1.1rem;
-  color: #555;
+nav a:hover {
+  color: #007BFF;
 }
 
-/* Cards de contas */
-.contas {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+/* Seções principais */
+section {
+  background-color: #fff;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.contas img {
-  width: 250px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
+/* Títulos */
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.contas img:hover {
-  transform: scale(1.05);
+/* Listas */
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+/* Links de contato */
+a.contact-link {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a.contact-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
 }
 
 /* Rodapé */
 footer {
-  background-color: #f1f1f1;
   text-align: center;
-  padding: 15px;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
   margin-top: 40px;
-  font-size: 0.9rem;
-  color: #333;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  section {
+    padding: 20px 10px;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
 }
