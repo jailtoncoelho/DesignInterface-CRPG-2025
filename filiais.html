@@ -1,95 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locadora IFPR - Filiais</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: auto;
-            background-color: #fff;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #333;
-            text-align: center;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li {
-            margin: 10px 0;
-        }
-        a.contact-link {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        a.contact-link:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel de Carros</title>
+  <style>
+    /* Estilos básicos do carrossel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+    }
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-images img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Locadora IFPR</h1>
-    <nav>
-        <a href="#filiais">Filiais</a>
-        <a href="#contato">Contato</a>
-    </nav>
-</header>
+  <div class="carousel">
+    <div class="carousel-images">
+      <img src="carro1.jpg" alt="Carro 1">
+      <img src="carro2.jpg" alt="Carro 2">
+      <img src="carro3.jpg" alt="Carro 3">
+    </div>
+    <div class="carousel-buttons">
+      <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </div>
 
-<section id="filiais">
-    <h2>Nossas Filiais</h2>
-    <ul>
-        <li>Filial Curitiba - Rua Exemplo, 123</li>
-        <li>Filial Ponta Grossa - Rua Exemplo, 456</li>
-        <li>Filial Londrina - Rua Exemplo, 789</li>
-    </ul>
-</section>
+  <script>
+    let currentSlide = 0;
 
-<section id="contato">
-    <h2>Contato</h2>
-    <ul>
-        <li>E-mail: <a class="contact-link" href="mailto:oliveira.padilha.joao@gmail.com">oliveira.padilha.joao@gmail.com</a></li>
-        <li>WhatsApp: <a class="contact-link" href="https://wa.me/5542984411127" target="_blank">(42) 98441-1127</a></li>
-        <li>Instagram: <a class="contact-link" href="https://instagram.com/jpzim402" target="_blank">@jpzim402</a></li>
-    </ul>
-</section>
-
-<footer>
-    <p>&copy; 2025 Locadora IFPR. Todos os direitos reservados.</p>
-</footer>
+    function moveSlide(direction) {
+      const slides = document.querySelectorAll('.carousel-images img');
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      document.querySelector('.carousel-images').style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  </script>
 
 </body>
 </html>
