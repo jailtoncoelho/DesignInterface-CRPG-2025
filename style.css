@@ -10,7 +10,7 @@ body {
 
 /* Cabeçalho mais moderno */
 header {
-    background: linear-gradient(135deg, #5e0da1, #9b19d2);
+    background: linear-gradient(135deg, #F02323, #981F1F);
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -29,7 +29,7 @@ header nav {
 
 header nav a {
     display: inline-block;
-    color: #a308c9;
+    color: #C62525;
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
@@ -39,7 +39,7 @@ header nav a {
 }
 
 header nav a:hover {
-    background-color: #a308c9;
+    background-color: #BB2828;
     color: #0d47a1;
 }
 
