@@ -1,98 +1,69 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Corpo da página */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  padding-top: 80px; /* espaço para header fixo */
-  line-height: 1.6;
-}
-
-/* Cabeçalho fixo */
-header {
-  position: fixed;
-  top: 0;
+/* Container do carrossel */
+.carousel {
+  position: relative;
   width: 100%;
-  background-color: #333;
+  max-width: 800px; /* Largura máxima do carrossel */
+  margin: 40px auto; /* Centraliza horizontalmente e dá espaço vertical */
+  overflow: hidden;
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Sombra suave */
+  background-color: #f5f5f5; /* Fundo neutro */
+}
+
+/* Área das imagens */
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Cada imagem */
+.carousel-images img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer */
+  height: 400px; /* Altura fixa, pode ajustar */
+}
+
+/* Botões do carrossel */
+.carousel-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none; /* Permite clique só nos botões */
+}
+
+.carousel-button {
+  pointer-events: all;
+  background-color: rgba(0,0,0,0.6);
   color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  z-index: 1000;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s;
 }
 
-/* Navegação */
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: #007BFF;
-}
-
-/* Seções principais */
-section {
-  background-color: #fff;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 40px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* Títulos */
-h2 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Listas */
-ul {
-  list-style: none;
-}
-
-ul li {
-  margin: 10px 0;
-}
-
-/* Links de contato */
-a.contact-link {
-  color: #007BFF;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a.contact-link:hover {
-  text-decoration: underline;
-  color: #0056b3;
-}
-
-/* Rodapé */
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
-  margin-top: 40px;
+.carousel-button:hover {
+  background-color: rgba(0,0,0,0.9);
 }
 
 /* Responsividade */
-@media (max-width: 600px) {
-  section {
-    padding: 20px 10px;
+@media (max-width: 768px) {
+  .carousel-images img {
+    height: 250px;
   }
+}
 
-  nav a {
-    display: block;
-    margin: 10px 0;
+@media (max-width: 480px) {
+  .carousel-images img {
+    height: 180px;
+  }
+  .carousel-button {
+    font-size: 18px;
+    padding: 8px;
   }
 }
