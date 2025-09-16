@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon IFPR - Pokedex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h2>Pokémon IFPR</h2>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="regioes.html">Regiões</a>
+            <a href="pokedex.html">Pokedex</a>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <h1>Busca pelo Pokémon</h1>
+        <form class="contato-form" id="pokedex-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome do Pokémon desejado" required>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Pokémon IFPR - Todos os direitos dos Pokémon</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('pokedex-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o envio do formulário tradicional
+
+            // Captura o nome digitado, remove espaços extras e transforma em minúsculas
+            const nomePokemon = document.getElementById('nome').value.trim().toLowerCase();
+
+            // Se houver valor, redireciona para a página da National Dex
+            if (nomePokemon) {
+                // Redireciona para a URL oficial da pokedex
+                const url = `https://www.pokemon.com/br/pokedex/${nomePokemon}`;
+                window.location.href = url;
+            } else {
+                alert("Por favor, insira o nome de um Pokémon.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
