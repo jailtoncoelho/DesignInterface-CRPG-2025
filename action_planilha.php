@@ -1,8 +1,7 @@
-<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // URL do Apps Script
-    $url = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+    $url = "";
 
     // Dados do formulário
     $data = [
