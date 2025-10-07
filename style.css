@@ -60,7 +60,7 @@ footer {
 }
 
 .filial {
-    background-color: #ffffff;
+    background-color: #ad7100;
     border-radius: 12px;
     padding: 20px;
     width: 250px;
@@ -99,7 +99,7 @@ footer {
 
 .contato-form button {
     background: #045e0b;
-    color: white;
+    color: Green;
     padding: 10px;
     border: none;
     border-radius: 6px;
@@ -109,5 +109,5 @@ footer {
 }
 
 .contato-form button:hover {
-    background:#302e2e;
+    background:#050505;
 }
