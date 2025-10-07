@@ -6,9 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Dados do formulário
     $data = [
-        "nome" => $_POST["nome"] ?? "",
-        "email" => $_POST["email"] ?? "",
-        "mensagem" => $_POST["mensagem"] ?? ""
+        "Pokemon" => $_POST["Pokemon"] ?? ""
         // Adicione outros campos conforme necessário
     ];
 
