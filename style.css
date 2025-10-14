@@ -85,7 +85,7 @@ footer {
 
 .contato-form label {
     font-weight: bold;
-    color: #0d47a1;
+    color: #453006;
 }
 
 .contato-form input,
@@ -129,7 +129,7 @@ footer {
 }
 
 .dados-planilha th {
-  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  background: linear-gradient(90deg, #453006, #d29119);
   color: #fff;
   text-align: left;
   padding: 10px;
