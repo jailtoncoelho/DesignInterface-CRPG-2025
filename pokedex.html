@@ -23,8 +23,8 @@
     <!-- Conteúdo principal -->
     <main>
         <h1>Busca pelo Pokémon</h1>
-        <form class="contato-form" action="https://script.google.com/macros/s/AKfycbwM_dTarvA-uBOuYMH5XD3vUfaozq6yvySdGwT2gIx-VlTJ1MHX3plFravgh0DZm5st/exec" method="POST">
-            <label for="nome">Nome:</label>
+        <form class="contato-form" action="https://script.google.com/macros/s/AKfycbwM_dTarvA-uBOuYMH5XD3vUfaozq6yvySdGwT2gIx-VlTJ1MHX3plFravgh0DZm5st/exec" method="POST" onsubmit="return redirecionarPokedex(event)">
+            <label for="pokemon">Nome:</label>
             <input type="text" id="pokemon" name="pokemon" placeholder="Digite o nome do Pokémon desejado" required>
 
             <button type="submit">Enviar</button>
@@ -38,21 +38,27 @@
 
     <!-- JavaScript -->
     <script>
-        document.getElementById('pokedex-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // Impede o envio do formulário tradicional
+        // Função para redirecionar após o envio do formulário
+        function redirecionarPokedex(event) {
+            // Impede o envio tradicional do formulário (somente se for necessário fazer algo antes)
+            event.preventDefault();
 
-            // Captura o nome digitado, remove espaços extras e transforma em minúsculas
-            const nomePokemon = document.getElementById('nome').value.trim().toLowerCase();
+            // Captura o nome do Pokémon digitado
+            const nomePokemon = document.getElementById('pokemon').value.trim().toLowerCase();
 
-            // Se houver valor, redireciona para a página da National Dex
+            // Verifica se o nome foi preenchido
             if (nomePokemon) {
-                // Redireciona para a URL oficial da pokedex
-                const url = `https://www.pokemon.com/br/pokedex/${nomePokemon}`;
-                window.location.href = url;
+                // Envia o formulário para o Google Sheets
+                event.target.submit();
+
+                // Redireciona para a página da Pokédex após o envio
+                setTimeout(() => {
+                    window.location.href = `https://www.pokemon.com/br/pokedex/${nomePokemon}`;
+                }, 500); // Pequeno delay para garantir que o formulário foi enviado
             } else {
                 alert("Por favor, insira o nome de um Pokémon.");
             }
-        });
+        }
     </script>
 
 </body>
