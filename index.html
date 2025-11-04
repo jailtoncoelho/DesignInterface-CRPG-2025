@@ -31,8 +31,58 @@
   </div>
 </main>
 
+<style>
+  .bloco-item {
+    display: inline-block;
+    text-align: center;
+    margin: 15px;
+  }
+
+  .pokemon-nome {
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.1em;
+  }
+
+  .tipo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+</style>
+
+<div id="conteudo"></div>
+
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec"
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
+
+// Dicionário com cores e ícones de tipo
+const tiposPokemon = {
+  fogo:    { cor: "#EE8130", icone: "🔥" },
+  agua:    { cor: "#6390F0", icone: "💧" },
+  planta:  { cor: "#7AC74C", icone: "🌿" },
+  eletrico:{ cor: "#F7D02C", icone: "⚡" },
+  psiquico:{ cor: "#F95587", icone: "🔮" },
+  gelo:    { cor: "#96D9D6", icone: "❄️" },
+  dragao:  { cor: "#6F35FC", icone: "🐉" },
+  noturno: { cor: "#705746", icone: "🌑" },
+  fada:    { cor: "#D685AD", icone: "✨" },
+  lutador: { cor: "#C22E28", icone: "🥊" },
+  venenoso:{ cor: "#A33EA1", icone: "☠️" },
+  terrestre:{ cor: "#E2BF65", icone: "🌍" },
+  pedra:   { cor: "#B6A136", icone: "🪨" },
+  fantasma:{ cor: "#735797", icone: "👻" },
+  inseto:  { cor: "#A6B91A", icone: "🐛" },
+  aco:     { cor: "#B7B7CE", icone: "⚙️" },
+  normal:  { cor: "#A8A77A", icone: "⚪" }
+};
+
 async function carregarConteudo() {
   const container = document.getElementById('conteudo');
   container.innerHTML = "<p>Carregando conteúdo...</p>";
@@ -46,26 +96,31 @@ async function carregarConteudo() {
       const bloco = document.createElement('div');
       bloco.className = 'bloco-item';
 
-      const titulo = document.createElement('h2');
-      titulo.textContent = item.Título || '';
-      bloco.appendChild(titulo);
+      // Cria a imagem
+      if (item.Url && item.Url.startsWith('http') && item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+        const img = document.createElement('img');
+        img.src = item.Url;
+        img.alt = item.Título || 'Imagem';
+        img.width = 150;
+        bloco.appendChild(img);
+      }
 
-      const descricao = document.createElement('p');
-      descricao.textContent = item.Descrição || '';
-      bloco.appendChild(descricao);
+      // Nome do Pokémon abaixo da imagem
+      const nome = document.createElement('div');
+      nome.className = 'pokemon-nome';
+      nome.textContent = item.Título || 'Pokémon';
+      bloco.appendChild(nome);
 
-      if (item.Url && item.Url.startsWith('http')) {
-        if (item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.Url.includes('unsplash')) {
-          const img = document.createElement('img');
-          img.src = item.Url;
-          img.alt = item.Título || 'Imagem';
-          bloco.appendChild(img);
-        } else {
-          const link = document.createElement('a');
-          link.href = item.Url;
-          link.textContent = 'Ver mais';
-          bloco.appendChild(link);
-        }
+      // Tipagem (cor e símbolo)
+      if (item.Tipo) {
+        const tipo = item.Tipo.toLowerCase();
+        const info = tiposPokemon[tipo] || { cor: '#888', icone: '❓' };
+
+        const tipoDiv = document.createElement('div');
+        tipoDiv.className = 'tipo';
+        tipoDiv.style.backgroundColor = info.cor;
+        tipoDiv.innerHTML = `${info.icone} ${item.Tipo}`;
+        bloco.appendChild(tipoDiv);
       }
 
       container.appendChild(bloco);
@@ -77,6 +132,7 @@ async function carregarConteudo() {
 
 carregarConteudo();
 </script>
+
     <!-- Rodapé -->
     <footer>
         <p>&copy; 2025 Pokemon IFPR - Todos os direitos dos Pokemon!</p>
