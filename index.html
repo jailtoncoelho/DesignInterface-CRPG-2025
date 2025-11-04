@@ -23,21 +23,61 @@
 
     <!-- Conteúdo principal -->
     <main>
-        <h1>Masks of the world war</h1>
-        <p>Many world war masks to see.</p>
+  <h1>Bem-vindo à Locadora de Veículos</h1>
+  <p>Encontre o carro ideal para sua viagem, trabalho ou lazer.</p>
 
-        <div class="World war masks">
-            <img src="https://images.newrepublic.com/3e6d21509f9a4d4059f82f56f615a4da3953aaaa.jpeg?auto=format&fit=crop&crop=faces&q=65&w=1000&ar=3%3A2&ixlib=react-9.10.0"
-                alt="Blitz in england, People wearing gas masks">
+  <div id="conteudo" class="conteudo-scroll">
+    <p>Carregando conteúdo...</p>
+  </div>
+</main>
 
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXrGUoH13cXvzr92tA34st2ZBMveUxMhTePidbLc2Sq5ienABNqPPtxKpBnBnLWM0QK4w&usqp=CAU"
-                alt="Baby mask">
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxtzO2bbo5S0KBH3Hl-phPqcKcmpowDo1KFPxmTFLoX4wUvn45xf03vV8mHYm1V_7Wf/exec"
+async function carregarConteudo() {
+  const container = document.getElementById('conteudo');
+  container.innerHTML = "<p>Carregando conteúdo...</p>";
 
-            <img src="https://images.saymedia-content.com/.image/t_share/MTc2NDU0NDE4NjcyNDYxNzg2/gas-masks-in-world-war-2-nobody-had-a-choice.jpg"
-                alt="Disney Mask">
-                
-        </div>
-    </main>
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const dados = await res.json();
+    container.innerHTML = '';
+
+    dados.forEach(item => {
+      const bloco = document.createElement('div');
+      bloco.className = 'bloco-item';
+
+      const titulo = document.createElement('h2');
+      titulo.textContent = item.Título || '';
+      bloco.appendChild(titulo);
+
+      const descricao = document.createElement('p');
+      descricao.textContent = item.Descrição || '';
+      bloco.appendChild(descricao);
+
+      if (item.Url && item.Url.startsWith('http')) {
+        if (item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.Url.includes('unsplash')) {
+          const img = document.createElement('img');
+          img.src = item.Url;
+          img.alt = item.Título || 'Imagem';
+          bloco.appendChild(img);
+        } else {
+          const link = document.createElement('a');
+          link.href = item.Url;
+          link.textContent = 'Ver mais';
+          bloco.appendChild(link);
+        }
+      }
+
+      container.appendChild(bloco);
+    });
+  } catch (err) {
+    container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+  }
+}
+
+carregarConteudo();
+</script>
+
 
     <!-- Rodapé -->
     <footer>
