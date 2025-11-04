@@ -58,12 +58,12 @@ async function carregarConteudo() {
         if (item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.Url.includes('unsplash')) {
           const img = document.createElement('img');
           img.src = item.Url;
-          img.alt = item.Título || 'Imagem';
+          img.alt = item.Título || 'Image';
           bloco.appendChild(img);
         } else {
           const link = document.createElement('a');
           link.href = item.Url;
-          link.textContent = 'Ver mais';
+          link.textContent = 'See more';
           bloco.appendChild(link);
         }
       }
@@ -71,7 +71,7 @@ async function carregarConteudo() {
       container.appendChild(bloco);
     });
   } catch (err) {
-    container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+    container.innerHTML = "<p>Failed to transport information: " + err.message + "</p>";
   }
 }
 
