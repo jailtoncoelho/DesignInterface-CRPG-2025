@@ -22,20 +22,20 @@
     </header>
 
     <!-- Conteúdo principal -->
-    <main>
-  <h1>Welcome to World war gas masks, here you can find what you need </h1>
-  <p>Wait here and stay safe in your bomb shelter and wait till the bombers stop.</p>
+<main>
+  <h1>Bem-vindo à Locadora de Veículos</h1>
+  <p>Encontre o carro ideal para sua viagem, trabalho ou lazer.</p>
 
   <div id="conteudo" class="conteudo-scroll">
-    <p>Deliverying information</p>
+    <p>Carregando conteúdo...</p>
   </div>
 </main>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxEKFLH7hGCPrxds5xLDxaw4BBEj7DFxKUNNgqH7evJN5FkVGFznlLyjzK0YjTUJlHJ/exec"
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxEKFLH7hGCPrxds5xLDxaw4BBEj7DFxKUNNgqH7evJN5FkVGFznlLyjzK0YjTUJlHJ/exec"; // substitua pela URL do seu Apps Script
 async function carregarConteudo() {
   const container = document.getElementById('conteudo');
-  container.innerHTML = "<p>Transporting information...</p>";
+  container.innerHTML = "<p>Carregando conteúdo...</p>";
 
   try {
     const res = await fetch(SCRIPT_URL);
@@ -58,12 +58,12 @@ async function carregarConteudo() {
         if (item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.Url.includes('unsplash')) {
           const img = document.createElement('img');
           img.src = item.Url;
-          img.alt = item.Título || 'Image';
+          img.alt = item.Título || 'Imagem';
           bloco.appendChild(img);
         } else {
           const link = document.createElement('a');
           link.href = item.Url;
-          link.textContent = 'See more';
+          link.textContent = 'Ver mais';
           bloco.appendChild(link);
         }
       }
@@ -71,11 +71,11 @@ async function carregarConteudo() {
       container.appendChild(bloco);
     });
   } catch (err) {
-    container.innerHTML = "<p>Failed to transport information: " + err.message + "</p>";
+    container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
   }
 }
 
-Failed to transport information();
+carregarConteudo();
 </script>
 
 
