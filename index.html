@@ -54,7 +54,7 @@ async function carregarConteudo() {
       descricao.textContent = item.Descrição || '';
       bloco.appendChild(descricao);
 
-if (item.Url && item.Url.startsWith('http')) {
+ if (item.Url && item.Url.startsWith('http')) {
   const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/;
 
   const match = item.Url.match(youtubeRegex);
@@ -62,6 +62,7 @@ if (item.Url && item.Url.startsWith('http')) {
     const videoId = match[1];
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.width = "100%";
     iframe.height = "315";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.setAttribute("allowfullscreen", true);
@@ -72,7 +73,7 @@ if (item.Url && item.Url.startsWith('http')) {
     img.src = item.Url;
     img.alt = item.Título || 'Imagem';
     bloco.appendChild(img);
-  }      
+  }
   else {
     const link = document.createElement('a');
     link.href = item.Url;
@@ -80,6 +81,8 @@ if (item.Url && item.Url.startsWith('http')) {
     bloco.appendChild(link);
   }
 }
+
+
       container.appendChild(bloco);
     });
   } catch (err) {
