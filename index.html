@@ -13,12 +13,17 @@
   <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
 </div>
 
+<!-- GIF animado no canto (com brilho em cores da Pokébola) -->
+<div class="gif-cinthya" id="gifCinthya">
+  <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
+</div>
+
 <style>
-  /* Estilo base do GIF */
+  /* Contêiner fixo do GIF */
   .gif-cinthya {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     z-index: 1000;
     opacity: 0;
     transform: translateY(50px);
@@ -26,30 +31,71 @@
     animation: flutuar 3s ease-in-out infinite;
   }
 
+  /* Imagem do GIF */
   .gif-cinthya img {
-    width: 150px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    width: 240px; /* tamanho aumentado */
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    filter: contrast(1.05) saturate(1.1);
+    animation: brilhoPokebola 4s infinite linear;
   }
 
   /* Efeito ao passar o mouse */
   .gif-cinthya img:hover {
-    transform: scale(1.1) rotate(3deg);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.15) rotate(3deg);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
   }
 
   /* Animação de flutuação */
   @keyframes flutuar {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-12px); }
   }
 
-  /* Classe que ativa a aparição */
+  /* Efeito de brilho em cores da Pokébola */
+  @keyframes brilhoPokebola {
+    0% {
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
+                  0 0 50px rgba(255, 255, 255, 0.4),
+                  0 0 80px rgba(0, 0, 0, 0.3);
+    }
+    33% {
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
+                  0 0 60px rgba(0, 0, 0, 0.4),
+                  0 0 90px rgba(255, 0, 0, 0.4);
+    }
+    66% {
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5),
+                  0 0 50px rgba(255, 0, 0, 0.5),
+                  0 0 80px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
+                  0 0 50px rgba(255, 255, 255, 0.4),
+                  0 0 80px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Classe para aparecer suavemente */
   .mostrar {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) {
+    .gif-cinthya {
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .gif-cinthya img {
+      width: 180px;
+    }
   }
 </style>
 
@@ -58,7 +104,7 @@
   window.addEventListener("load", () => {
     setTimeout(() => {
       document.getElementById("gifCinthya").classList.add("mostrar");
-    }, 1500); // aparece após 1.5 segundos
+    }, 1500);
   });
 </script>
 
