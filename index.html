@@ -73,6 +73,8 @@ if (item.Url && item.Url.startsWith('http')) {
     img.alt = item.Título || 'Imagem';
     bloco.appendChild(img);
   }
+ }
+      
   else {
     const link = document.createElement('a');
     link.href = item.Url;
