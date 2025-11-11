@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
     
-    <!-- GIF animado no canto (com entrada suave e interação) -->
-<div class="gif-cinthya" id="gifCinthya">
-  <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
-</div>
-
-<!-- GIF animado no canto (com brilho em cores da Pokébola) -->
+<!-- GIF animado no canto (quadrado com brilho em cores da Pokébola) -->
 <div class="gif-cinthya" id="gifCinthya">
   <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
 </div>
@@ -31,10 +26,10 @@
     animation: flutuar 3s ease-in-out infinite;
   }
 
-  /* Imagem do GIF */
+  /* Imagem do GIF (quadrado com cantos suaves) */
   .gif-cinthya img {
-    width: 240px; /* tamanho aumentado */
-    border-radius: 50%;
+    width: 240px; /* mantém o tamanho grande */
+    border-radius: 16px; /* formato quadrado com cantos arredondados */
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -46,7 +41,7 @@
 
   /* Efeito ao passar o mouse */
   .gif-cinthya img:hover {
-    transform: scale(1.15) rotate(3deg);
+    transform: scale(1.12) rotate(2deg);
     box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
   }
 
@@ -56,7 +51,7 @@
     50% { transform: translateY(-12px); }
   }
 
-  /* Efeito de brilho em cores da Pokébola */
+  /* Efeito de brilho com as cores da Pokébola */
   @keyframes brilhoPokebola {
     0% {
       box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
@@ -80,7 +75,7 @@
     }
   }
 
-  /* Classe para aparecer suavemente */
+  /* Classe para aparição suave */
   .mostrar {
     opacity: 1;
     transform: translateY(0);
@@ -107,6 +102,7 @@
     }, 1500);
   });
 </script>
+
 
 <body>
 
