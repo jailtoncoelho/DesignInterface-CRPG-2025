@@ -4,99 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escolha de Inicial</title>
+  <title>Pokémon IFPR</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
-<!-- GIF animado no canto -->
-<div class="gif-cinthya" id="gifCinthya">
-  <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
-</div>
-
-<style>
-  /* GIF flutuante com brilho Pokébola */
-  .gif-cinthya {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 1s ease, transform 1s ease;
-    animation: flutuar 3s ease-in-out infinite;
-  }
-
-  .gif-cinthya img {
-    width: 240px;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    filter: contrast(1.05) saturate(1.1);
-    animation: brilhoPokebola 4s infinite linear;
-  }
-
-  .gif-cinthya img:hover {
-    transform: scale(1.12) rotate(2deg);
-    box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
-  }
-
-  @keyframes flutuar {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-
-  @keyframes brilhoPokebola {
-    0% {
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
-                  0 0 50px rgba(255, 255, 255, 0.4),
-                  0 0 80px rgba(0, 0, 0, 0.3);
-    }
-    33% {
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
-                  0 0 60px rgba(0, 0, 0, 0.4),
-                  0 0 90px rgba(255, 0, 0, 0.4);
-    }
-    66% {
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5),
-                  0 0 50px rgba(255, 0, 0, 0.5),
-                  0 0 80px rgba(255, 255, 255, 0.4);
-    }
-    100% {
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
-                  0 0 50px rgba(255, 255, 255, 0.4),
-                  0 0 80px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  .mostrar {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 600px) {
-    .gif-cinthya {
-      bottom: 15px;
-      right: 15px;
-    }
-    .gif-cinthya img {
-      width: 180px;
-    }
-  }
-</style>
-
-<script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("gifCinthya").classList.add("mostrar");
-    }, 1500);
-  });
-</script>
-
 <body>
 
+  <!-- PLANO DE FUNDO: GIF DA CYNTHIA -->
+  <div class="fundo-cinthya"></div>
+
+  <!-- Cabeçalho -->
   <header>
     <h2>Pokémon IFPR</h2>
     <nav>
@@ -107,6 +24,7 @@
     </nav>
   </header>
 
+  <!-- Conteúdo principal -->
   <main>
     <h1>Pokémon IFPR</h1>
     <p>"Gotta Catch 'Em All!"</p>
@@ -116,13 +34,52 @@
     </div>
   </main>
 
+  <footer>
+    <p>&copy; 2025 Pokémon IFPR - Todos os direitos reservados.</p>
+  </footer>
+
   <style>
-    /* Layout principal em 3 colunas */
+    /* === PLANO DE FUNDO COM GIF DA CYNTHIA === */
+    .fundo-cinthya {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif") center center / cover no-repeat;
+      filter: brightness(0.4) blur(4px);
+      z-index: -1;
+    }
+
+    /* Cabeçalho */
+    header {
+      text-align: center;
+      padding: 15px 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+    }
+
+    /* === GRADE DE POKÉMON === */
     #conteudo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      padding: 20px;
+      gap: 30px;
+      padding: 40px;
       justify-items: center;
     }
 
@@ -138,32 +95,48 @@
       }
     }
 
+    /* === BLOCO DOS POKÉMONS === */
     .bloco-item {
-      background: #fff;
-      border-radius: 12px;
-      padding: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s;
-      width: 90%;
-      max-width: 260px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 300px;
     }
 
     .bloco-item:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+    }
+
+    .bloco-item img {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      transition: transform 0.3s;
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+    }
+
+    .bloco-item:hover img {
       transform: scale(1.05);
     }
 
     .pokemon-nome {
       font-weight: bold;
-      margin-top: 8px;
-      font-size: 1.1em;
+      margin-top: 10px;
+      font-size: 1.3em;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
     }
 
     .tipo-container {
       display: flex;
       justify-content: center;
-      gap: 6px;
-      margin-top: 6px;
+      gap: 8px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
 
@@ -172,11 +145,26 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 4px 8px;
-      border-radius: 10px;
+      padding: 6px 10px;
+      border-radius: 12px;
       color: white;
-      font-size: 0.9em;
+      font-size: 1em;
       font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    h1, p {
+      text-align: center;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     }
   </style>
 
@@ -217,11 +205,18 @@
           const bloco = document.createElement('div');
           bloco.className = 'bloco-item';
 
-          if (item.Url && item.Url.startsWith('http') && item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+          let corBorda = "#fff";
+          if (item.Tipo) {
+            const tipoPrincipal = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
+            corBorda = tiposPokemon[tipoPrincipal]?.cor || "#fff";
+          }
+
+          bloco.style.border = `4px solid ${corBorda}`;
+
+          if (item.Url && item.Url.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i)) {
             const img = document.createElement('img');
             img.src = item.Url;
             img.alt = item.Título || 'Imagem';
-            img.width = 150;
             bloco.appendChild(img);
           }
 
@@ -256,10 +251,6 @@
 
     carregarConteudo();
   </script>
-
-  <footer>
-    <p>&copy; 2025 Pokémon IFPR - Todos os direitos reservados.</p>
-  </footer>
 
 </body>
 </html>
