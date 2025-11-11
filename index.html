@@ -72,9 +72,7 @@ if (item.Url && item.Url.startsWith('http')) {
     img.src = item.Url;
     img.alt = item.Título || 'Imagem';
     bloco.appendChild(img);
-  }
- }
-      
+  }      
   else {
     const link = document.createElement('a');
     link.href = item.Url;
@@ -82,23 +80,6 @@ if (item.Url && item.Url.startsWith('http')) {
     bloco.appendChild(link);
   }
 }
-
-  else {
-    const link = document.createElement('a');
-    link.href = item.Url;
-    link.textContent = 'Ver mais';
-    bloco.appendChild(link);
-  }
-}
-  else {
-    const link = document.createElement('a');
-    link.href = item.Url;
-    link.textContent = 'Ver mais';
-    bloco.appendChild(link);
-  }
-}
-
-
       container.appendChild(bloco);
     });
   } catch (err) {
