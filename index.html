@@ -10,7 +10,7 @@
 
 <body>
 
-  <!-- Faixas topo -->
+  <!-- FAIXAS TOPO -->
   <header>
     <div class="faixa-vermelha"></div>
     <div class="faixa-preta"></div>
@@ -23,11 +23,11 @@
     </nav>
   </header>
 
-  <!-- GIF da Cynthia entre faixas -->
-  <div class="fundo-cinthya"></div>
-
-  <!-- Conteúdo principal -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main>
+    <!-- GIF da Cynthia como fundo -->
+    <div class="fundo-cinthya"></div>
+
     <h1>Pokémon IFPR</h1>
     <p>"Gotta Catch 'Em All!"</p>
 
@@ -88,24 +88,23 @@
       color: #ffcc00;
     }
 
-    /* === GIF CYNTHIA === */
+    /* === GIF DA CYNTHIA ATRÁS DOS POKÉMON === */
     .fundo-cinthya {
       position: absolute;
-      top: 20px; /* abaixo da faixa vermelha */
+      top: 0;
       left: 0;
       width: 100%;
-      height: 120px; /* altura entre faixas */
-      background: url("https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif") center center / contain no-repeat;
-      z-index: 1;
+      height: 180px; /* altura do GIF */
+      background: url("https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif") center center / cover no-repeat;
+      z-index: 0; /* atrás do conteúdo */
       pointer-events: none;
-      filter: brightness(0.8) saturate(1.1);
+      filter: brightness(0.6) saturate(1.1);
     }
 
-    /* === CONTEÚDO PRINCIPAL === */
     main {
-      padding-top: 180px; /* garante que Pokémon fiquem abaixo do GIF */
       position: relative;
-      z-index: 5;
+      z-index: 1;
+      padding-top: 200px; /* garante que Pokémon fiquem abaixo do topo/GIF */
     }
 
     h1, p {
@@ -135,7 +134,7 @@
       }
     }
 
-    /* === BLOCO POKÉMON === */
+    /* === BLOCO DOS POKÉMONS === */
     .bloco-item {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
@@ -210,7 +209,6 @@
       color: white;
       background: rgba(0, 0, 0, 0.5);
     }
-
   </style>
 
   <script>
