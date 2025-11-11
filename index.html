@@ -7,6 +7,60 @@
     <title>Escolha de Inicial</title>
     <link rel="stylesheet" href="style.css">
 </head>
+    
+    <!-- GIF animado no canto (com entrada suave e interação) -->
+<div class="gif-cinthya" id="gifCinthya">
+  <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
+</div>
+
+<style>
+  /* Estilo base do GIF */
+  .gif-cinthya {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+    animation: flutuar 3s ease-in-out infinite;
+  }
+
+  .gif-cinthya img {
+    width: 150px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Efeito ao passar o mouse */
+  .gif-cinthya img:hover {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Animação de flutuação */
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Classe que ativa a aparição */
+  .mostrar {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Faz o GIF aparecer suavemente após alguns segundos
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("gifCinthya").classList.add("mostrar");
+    }, 1500); // aparece após 1.5 segundos
+  });
+</script>
 
 <body>
 
