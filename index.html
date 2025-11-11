@@ -62,6 +62,7 @@ if (item.Url && item.Url.startsWith('http')) {
     const videoId = match[1];
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.height = "315";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.setAttribute("allowfullscreen", true);
     bloco.appendChild(iframe);
@@ -72,6 +73,14 @@ if (item.Url && item.Url.startsWith('http')) {
     img.alt = item.Título || 'Imagem';
     bloco.appendChild(img);
   }
+  else {
+    const link = document.createElement('a');
+    link.href = item.Url;
+    link.textContent = 'Ver mais';
+    bloco.appendChild(link);
+  }
+}
+
   else {
     const link = document.createElement('a');
     link.href = item.Url;
