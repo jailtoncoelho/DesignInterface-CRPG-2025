@@ -81,20 +81,11 @@
       overflow: hidden;
     }
 
-    .tema-claro .pokebola-superior { background: #d00000; }
-    .tema-claro .pokebola-faixa { background: black; }
-    .tema-claro .pokebola-inferior { background: white; }
-    .tema-claro .pokebola-botao { background: white; border: 8px solid black; }
-
-    .tema-escuro .pokebola-superior { background: #0a0a0a; }
-    .tema-escuro .pokebola-faixa { background: #ffcc00; }
-    .tema-escuro .pokebola-inferior { background: #0053a0; }
-    .tema-escuro .pokebola-botao { background: #1e1e1e; border: 8px solid #ffcc00; }
-
-    .pokebola-superior, .pokebola-faixa, .pokebola-inferior {
+    .pokebola-superior, .pokebola-faixa, .pokebola-inferior, .pokebola-botao {
       position: absolute;
       width: 100%;
     }
+
     .pokebola-superior { height: 75px; top: 0; }
     .pokebola-faixa { height: 25px; top: 62px; z-index: 3; }
     .pokebola-inferior { height: 75px; bottom: 0; }
@@ -116,59 +107,86 @@
       50% { transform: translateX(-50%) scale(1.12); }
     }
 
+    /* TEMA CLARO */
+    .tema-claro .pokebola-superior { background: #d00000; }
+    .tema-claro .pokebola-faixa { background: black; }
+    .tema-claro .pokebola-inferior { background: white; }
+    .tema-claro .pokebola-botao { background: white; border: 8px solid black; }
+
+    /* TEMA ESCURO / ULTRA BALL */
+    .tema-escuro .pokebola-superior { background: black; }
+    .tema-escuro .pokebola-faixa { background: yellow; }
+    .tema-escuro .pokebola-inferior { background: white; }
+    .tema-escuro .pokebola-botao { background: black; border: 8px solid yellow; }
+
     /* =========================================
        CORES DO TEMA
     ========================================= */
-    .tema-claro {
-      background: #f0f0f0;
-      color: #111;
-    }
+    .tema-claro { background: #f0f0f0; color: #111; }
+    .tema-escuro { background: linear-gradient(to bottom, #000814, #001d3d); color: white; }
 
-    .tema-escuro {
-      background: linear-gradient(to bottom, #000814, #001d3d);
-      color: white;
-    }
-
-    /* NAVIGATION STYLE */
+    /* =========================================
+       NAVIGATION STYLE REFINADO
+    ========================================= */
     nav {
       text-align: center;
       padding: 15px 0;
       position: sticky;
       top: 0;
+      z-index: 50;
     }
 
     nav a {
-      margin: 0 15px;
+      margin: 0 12px;
       text-decoration: none;
       font-family: 'Fredoka One', cursive;
       font-size: 18px;
-      padding: 10px 18px;
-      border-radius: 12px;
-      transition: 0.3s;
+      padding: 12px 22px;
+      border-radius: 25px;
       display: inline-block;
+      box-shadow: 0 5px 0 #999;
+      transition: 0.3s;
+      position: relative;
     }
 
-    .tema-claro nav { background: rgba(255,255,255,0.8); }
+    /* Tema Claro Botões */
     .tema-claro nav a {
       background: #ff0000;
       color: white;
     }
+    .tema-claro nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0; width: 100%; height: 4px;
+      background: #990000;
+      border-radius: 4px;
+    }
     .tema-claro nav a:hover {
-      background: #d40000;
-      transform: scale(1.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 #999;
     }
 
-    .tema-escuro nav { background: rgba(0,0,0,0.7); }
+    /* Tema Escuro Botões */
     .tema-escuro nav a {
-      background: #0053a0;
-      color: #ffcc00;
+      background: #000;
+      color: yellow;
+      box-shadow: 0 5px 0 #555;
+    }
+    .tema-escuro nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0; width: 100%; height: 4px;
+      background: #ffcc00;
+      border-radius: 4px;
     }
     .tema-escuro nav a:hover {
-      background: #003f7f;
-      transform: scale(1.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 #555;
     }
 
-    /* GRID DE POKÉMON */
+    /* =========================================
+       GRID DE POKÉMON
+    ========================================= */
     #conteudo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -176,8 +194,8 @@
       padding: 40px;
       justify-items: center;
     }
-    @media(max-width:900px) { #conteudo { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:600px) { #conteudo { grid-template-columns: 1fr; } }
+    @media(max-width:900px){ #conteudo{ grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:600px){ #conteudo{ grid-template-columns: 1fr; } }
 
     .bloco-item {
       width: 280px;
@@ -191,7 +209,7 @@
     }
 
     .tema-claro .bloco-item { background: rgba(255,255,255,0.35); box-shadow: 0 0 12px rgba(0,0,0,0.25); }
-    .tema-escuro .bloco-item { background: rgba(0,0,0,0.45); box-shadow: 0 0 12px rgba(0,150,255,0.4); }
+    .tema-escuro .bloco-item { background: rgba(0,0,0,0.45); box-shadow: 0 0 12px rgba(255,255,0,0.4); }
 
     .bloco-item:hover { transform: scale(1.06); }
 
@@ -210,24 +228,23 @@
   </style>
 
   <script>
-    /* TROCA E SALVAMENTO DE TEMA */
+    /* TROCA DE TEMA */
     const botaoTema = document.getElementById("toggleTema");
     const body = document.body;
 
-    function aplicarTema(tema) {
-      body.classList.remove("tema-claro", "tema-escuro");
+    function aplicarTema(tema){
+      body.classList.remove("tema-claro","tema-escuro");
       body.classList.add(tema);
-      botaoTema.textContent = tema === "tema-claro" ? "🌙" : "☀️";
-      localStorage.setItem("tema", tema);
+      botaoTema.textContent = tema==="tema-claro"?"🌙":"☀️";
+      localStorage.setItem("tema",tema);
     }
 
-    botaoTema.onclick = () => {
-      const novoTema = body.classList.contains("tema-claro") ? "tema-escuro" : "tema-claro";
+    botaoTema.onclick = ()=> {
+      const novoTema = body.classList.contains("tema-claro")?"tema-escuro":"tema-claro";
       aplicarTema(novoTema);
     };
 
     aplicarTema(localStorage.getItem("tema") || "tema-claro");
-
 
     /* CARREGAR POKÉMONS */
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
@@ -241,45 +258,43 @@
       aco:{cor:"#B7B7CE",icone:"⚙️"}, normal:{cor:"#A8A77A",icone:"⚪"}, voador:{cor:"#A98FF3",icone:"🌬️"}
     };
 
-    async function carregarConteudo() {
+    async function carregarConteudo(){
       const container = document.getElementById('conteudo');
-      container.innerHTML = "<p>Carregando conteúdo...</p>";
-
-      try {
+      container.innerHTML="<p>Carregando conteúdo...</p>";
+      try{
         const res = await fetch(SCRIPT_URL);
         const dados = await res.json();
-        container.innerHTML = "";
-
-        dados.forEach(item => {
+        container.innerHTML="";
+        dados.forEach(item=>{
           const bloco = document.createElement('div');
-          bloco.className = 'bloco-item';
-          let corBorda = "#fff";
+          bloco.className='bloco-item';
+          let corBorda="#fff";
           if(item.Tipo){
-            const tp = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
-            corBorda = tiposPokemon[tp]?.cor || "#fff";
+            const tp=item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
+            corBorda=tiposPokemon[tp]?.cor||"#fff";
           }
-          bloco.style.border = `4px solid ${corBorda}`;
+          bloco.style.border=`4px solid ${corBorda}`;
 
           if(item.Url){
             const img = document.createElement('img');
-            img.src = item.Url;
+            img.src=item.Url;
             bloco.appendChild(img);
           }
 
           const nome = document.createElement('div');
-          nome.className = 'pokemon-nome';
-          nome.textContent = item.Título;
+          nome.className='pokemon-nome';
+          nome.textContent=item.Título;
           bloco.appendChild(nome);
 
           if(item.Tipo){
-            const tiposDiv = document.createElement("div");
-            tiposDiv.className = "tipo-container";
+            const tiposDiv=document.createElement("div");
+            tiposDiv.className="tipo-container";
             item.Tipo.split(/[\/,]/).map(t=>t.trim().toLowerCase()).forEach(tipo=>{
-              const info = tiposPokemon[tipo] || {cor:"#999", icone:"❓"};
-              const el = document.createElement("div");
-              el.className = "tipo";
-              el.style.backgroundColor = info.cor;
-              el.innerHTML = `${info.icone} ${tipo}`;
+              const info=tiposPokemon[tipo]||{cor:"#999",icone:"❓"};
+              const el=document.createElement("div");
+              el.className="tipo";
+              el.style.backgroundColor=info.cor;
+              el.innerHTML=`${info.icone} ${tipo}`;
               tiposDiv.appendChild(el);
             });
             bloco.appendChild(tiposDiv);
@@ -287,9 +302,8 @@
 
           container.appendChild(bloco);
         });
-
-      } catch(err){
-        container.innerHTML = "<p>Erro ao carregar.</p>";
+      }catch(err){
+        container.innerHTML="<p>Erro ao carregar.</p>";
       }
     }
 
