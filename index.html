@@ -60,6 +60,7 @@
     border-radius: 50%;
     border: 4px solid #000;
     background: var(--bola-fundo, linear-gradient(to bottom, #d00000 0%, #d00000 50%, #fff 50%, #fff 100%));
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     z-index: 1;
   }
 
@@ -79,6 +80,7 @@
     );
     border-top: 2px solid var(--linha-preta, #000);
     border-bottom: 2px solid var(--linha-preta, #000);
+    border-radius: 6px;
     z-index: 2;
   }
 
@@ -100,6 +102,13 @@
     width: 200px;
     transition: transform 0.3s, box-shadow 0.3s;
     border: 3px solid #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .bloco-item:hover {
@@ -112,6 +121,10 @@
     height: 120px;
     object-fit: contain;
     margin-bottom: 8px;
+    transition: transform 0.3s;
+  }
+  .bloco-item:hover img {
+    transform: scale(1.1) rotate(-10deg);
   }
 
   .pokemon-nome {
@@ -148,7 +161,9 @@
     border-radius: 12px;
     cursor: pointer;
     z-index: 100;
+    transition: 0.3s;
   }
+  .tema-toggle:hover { transform: scale(1.05); }
 </style>
 </head>
 <body class="tema-claro">
@@ -212,9 +227,10 @@ function tipoCor(tipo) {
 }
 
 // Função para criar blocos
-function criarBlocoPokemon(p) {
+function criarBlocoPokemon(p, delay) {
   const bloco = document.createElement("div");
   bloco.className = "bloco-item";
+  bloco.style.animationDelay = `${delay}s`;
 
   const img = document.createElement("img");
   img.src = p.imagem;
@@ -240,11 +256,12 @@ function criarBlocoPokemon(p) {
   return bloco;
 }
 
-// Carregar Pokémons
+// Carregar Pokémons com animação em cascata
 function carregarPokemons() {
   conteudo.innerHTML = "";
-  pokemons.forEach(p => {
-    conteudo.appendChild(criarBlocoPokemon(p));
+  pokemons.forEach((p, i) => {
+    const bloco = criarBlocoPokemon(p, i * 0.2);
+    conteudo.appendChild(bloco);
   });
 }
 
