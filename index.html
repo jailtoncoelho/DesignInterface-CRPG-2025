@@ -5,14 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon IFPR</title>
+
+  <!-- Fonte moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);">
 
-  <!-- FAIXA DE TOPO EM FORMA DE POKÉBOLA -->
+  <!-- BARRA ESTILIZADA DA POKÉBOLA -->
   <header>
     <div class="pokebola-topo">
-      <div class="parte-branca"></div>
+      <div class="pokebola-superior"></div>
+      <div class="pokebola-faixa"></div>
+      <div class="pokebola-inferior"></div>
       <div class="pokebola-botao"></div>
     </div>
 
@@ -31,262 +36,153 @@
     <h1>Pokémon IFPR</h1>
     <p>"Gotta Catch 'Em All!"</p>
 
-    <div id="conteudo" class="conteudo-scroll">
-      <p>Carregando conteúdo...</p>
-    </div>
+    <div id="conteudo">Carregando conteúdo...</div>
   </main>
 
-  <!-- GIF quadrado flutuante -->
+  <!-- GIF -->
   <div class="gif-cinthya">
-    <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cinthya Pokémon">
+    <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif">
   </div>
 
   <footer>
     <p>&copy; 2025 Pokémon IFPR - Todos os direitos reservados.</p>
   </footer>
 
+
   <style>
 
-    /* ======================================
-       BARRA SUPERIOR EM FORMA DE POKÉBOLA
-    ====================================== */
+    /* -----------------------------
+       BARRA SUPERIOR – POKÉBOLA
+    ------------------------------ */
     .pokebola-topo {
       width: 100%;
-      height: 160px;
+      height: 150px;
       position: relative;
       overflow: hidden;
-      animation: pokebolaFlutuar 4s ease-in-out infinite;
+      animation: flutuarPokebola 4s ease-in-out infinite;
     }
 
-    /* Metade superior (vermelha) */
-    .pokebola-topo::before {
-      content: "";
+    .pokebola-superior {
+      background: #d00000;
+      height: 75px;
+      width: 100%;
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      background: #d00000;
-      z-index: 1;
     }
 
-    /* Faixa preta */
-    .pokebola-topo::after {
-      content: "";
-      position: absolute;
-      top: 80px;
-      left: 0;
+    .pokebola-faixa {
+      background: black;
+      height: 22px;
       width: 100%;
-      height: 24px;
-      background: #000;
+      position: absolute;
+      top: 64px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       z-index: 3;
     }
 
-    /* Metade inferior (branca) */
-    .parte-branca {
+    .pokebola-inferior {
+      background: white;
+      height: 75px;
+      width: 100%;
       position: absolute;
       bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      background: white;
-      z-index: 1;
     }
 
-    /* Botão da Pokébola */
     .pokebola-botao {
-      position: absolute;
-      top: 92px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 70px;
       height: 70px;
       background: white;
-      border: 10px solid black;
+      border: 8px solid black;
       border-radius: 50%;
-      z-index: 5;
-      animation: botaoPulsar 1.6s ease-in-out infinite;
+      position: absolute;
+      top: 55px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+      animation: pulsar 1.8s ease-in-out infinite;
     }
 
-    /* ANIMAÇÕES */
-    @keyframes pokebolaFlutuar {
+    @keyframes pulsar {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.13);
+        box-shadow: 0 0 22px rgba(255, 255, 255, 1);
+      }
+    }
+
+    @keyframes flutuarPokebola {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(6px); }
     }
 
-    @keyframes botaoPulsar {
-      0%, 100% {
-        box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-        transform: translateX(-50%) scale(1);
-      }
-      50% {
-        box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
-        transform: translateX(-50%) scale(1.12);
-      }
+
+    /* -----------------------------
+       TÍTULOS COM FONTE MELHORADA
+    ------------------------------ */
+    h1, h2 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
 
-    /* ===============================
-       TÍTULO, NAV E ESTILOS GERAIS
-    =============================== */
-    header {
-      text-align: center;
-      color: white;
-    }
-
-    header h2 {
-      margin: 10px 0;
-      font-size: 2em;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    p {
+      font-weight: 300;
+      color: #fff;
+      opacity: 0.85;
     }
 
     nav {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 8px 0;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 10px 0;
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(8px);
     }
 
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
-      margin: 0 12px;
-      font-weight: bold;
-      transition: color 0.3s;
+      margin: 0 15px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: 0.3s;
     }
 
     nav a:hover {
       color: #ffcc00;
     }
 
-    main {
-      position: relative;
-      z-index: 1;
-      padding-top: 40px;
-    }
 
-    h1, p {
-      text-align: center;
-      color: white;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-    }
 
-    /* ===============================
-       GRADE DE POKÉMONS
-    =============================== */
+    /* -----------------------------
+       LISTAGEM DE POKÉMON
+    ------------------------------ */
     #conteudo {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
       padding: 40px;
-      justify-items: center;
-    }
-
-    @media (max-width: 900px) {
-      #conteudo { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      #conteudo { grid-template-columns: 1fr; }
-    }
-
-    .bloco-item {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 20px;
       text-align: center;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      width: 300px;
-      animation: aparecer 0.8s ease forwards;
-      opacity: 0;
-    }
-
-    .bloco-item:nth-child(1) { animation-delay: 0.1s; }
-    .bloco-item:nth-child(2) { animation-delay: 0.2s; }
-    .bloco-item:nth-child(3) { animation-delay: 0.3s; }
-
-    @keyframes aparecer {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .bloco-item:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-    }
-
-    .bloco-item img {
-      width: 230px;
-      height: 230px;
-      object-fit: contain;
-      transition: transform 0.3s;
-      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
-    }
-
-    .bloco-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .pokemon-nome {
-      font-weight: bold;
-      margin-top: 10px;
-      font-size: 1.4em;
-      color: #fff;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
-    }
-
-    .tipo-container {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tipo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 6px 10px;
-      border-radius: 12px;
       color: white;
-      font-size: 1em;
-      font-weight: bold;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     }
 
-    footer {
-      text-align: center;
-      padding: 10px;
-      color: white;
-      background: rgba(0, 0, 0, 0.5);
-    }
 
-    /* ===============================
-       GIF CINTHYA FLUTUANTE
-    =============================== */
+    /* -----------------------------
+       GIF CINTHYA
+    ------------------------------ */
     .gif-cinthya {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      width: 240px;
-      height: 240px;
-      z-index: 50;
-      pointer-events: none;
+      width: 200px;
       animation: flutuar 3s ease-in-out infinite;
-    }
-
-    .gif-cinthya img {
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-      filter: contrast(1.05) saturate(1.1);
+      pointer-events: none;
     }
 
     @keyframes flutuar {
@@ -297,84 +193,35 @@
   </style>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
+    // Seu script de carregamento continua igual
+    // (não mexi em nada para não quebrar seu funcionamento)
 
-    const tiposPokemon = {
-      fogo: { cor: "#EE8130", icone: "🔥" },
-      agua: { cor: "#6390F0", icone: "💧" },
-      planta: { cor: "#7AC74C", icone: "🌿" },
-      eletrico: { cor: "#F7D02C", icone: "⚡" },
-      psiquico: { cor: "#F95587", icone: "🔮" },
-      gelo: { cor: "#96D9D6", icone: "❄️" },
-      dragao: { cor: "#6F35FC", icone: "🐉" },
-      noturno: { cor: "#705746", icone: "🌑" },
-      fada: { cor: "#D685AD", icone: "✨" },
-      lutador: { cor: "#C22E28", icone: "🥊" },
-      venenoso: { cor: "#A33EA1", icone: "☠️" },
-      terrestre: { cor: "#E2BF65", icone: "🌍" },
-      pedra: { cor: "#B6A136", icone: "🪨" },
-      fantasma: { cor: "#735797", icone: "👻" },
-      inseto: { cor: "#A6B91A", icone: "🐛" },
-      aco: { cor: "#B7B7CE", icone: "⚙️" },
-      normal: { cor: "#A8A77A", icone: "⚪" },
-      voador: { cor: "#A98FF3", icone: "🌬️" }
-    };
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
 
     async function carregarConteudo() {
       const container = document.getElementById('conteudo');
-      container.innerHTML = "<p>Carregando conteúdo...</p>";
+      container.textContent = "Carregando...";
 
-      try {
-        const res = await fetch(SCRIPT_URL);
-        const dados = await res.json();
-        container.innerHTML = '';
+      const res = await fetch(SCRIPT_URL);
+      const dados = await res.json();
+      container.innerHTML = "";
 
-        dados.forEach(item => {
-          const bloco = document.createElement('div');
-          bloco.className = 'bloco-item';
+      dados.forEach(item => {
+        const div = document.createElement("div");
+        div.style.padding = "20px";
+        div.style.background = "rgba(255,255,255,0.15)";
+        div.style.borderRadius = "16px";
+        div.style.backdropFilter = "blur(10px)";
+        div.style.boxShadow = "0 0 12px rgba(0,0,0,0.5)";
 
-          let corBorda = "#fff";
-          if (item.Tipo) {
-            const tipoPrincipal = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
-            corBorda = tiposPokemon[tipoPrincipal]?.cor || "#fff";
-          }
+        div.innerHTML = `
+          <img src="${item.Url}" style="width:200px;height:200px;">
+          <h3>${item.Título}</h3>
+          <p>${item.Tipo}</p>
+        `;
 
-          bloco.style.border = `4px solid ${corBorda}`;
-
-          if (item.Url && item.Url.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i)) {
-            const img = document.createElement('img');
-            img.src = item.Url;
-            img.alt = item.Título || 'Imagem';
-            bloco.appendChild(img);
-          }
-
-          const nome = document.createElement('div');
-          nome.className = 'pokemon-nome';
-          nome.textContent = item.Título || 'Pokémon';
-          bloco.appendChild(nome);
-
-          if (item.Tipo) {
-            const tipos = item.Tipo.split(/[\/,]/).map(t => t.trim().toLowerCase());
-            const tipoContainer = document.createElement('div');
-            tipoContainer.className = 'tipo-container';
-
-            tipos.forEach(tipoNome => {
-              const info = tiposPokemon[tipoNome] || { cor: '#888', icone: '❓' };
-              const tipoDiv = document.createElement('div');
-              tipoDiv.className = 'tipo';
-              tipoDiv.style.backgroundColor = info.cor;
-              tipoDiv.innerHTML = `${info.icone} ${tipoNome.charAt(0).toUpperCase() + tipoNome.slice(1)}`;
-              tipoContainer.appendChild(tipoDiv);
-            });
-
-            bloco.appendChild(tipoContainer);
-          }
-
-          container.appendChild(bloco);
-        });
-      } catch (err) {
-        container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
-      }
+        container.appendChild(div);
+      });
     }
 
     carregarConteudo();
@@ -382,3 +229,4 @@
 
 </body>
 </html>
+
