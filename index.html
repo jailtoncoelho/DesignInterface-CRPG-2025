@@ -1,287 +1,324 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pokémon IFPR</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-  body { min-height: 100vh; transition: background-color 0.3s ease, color 0.3s ease; }
-  body.tema-claro { background-color: #f0f0f0; color: #222; }
-  body.tema-escuro { background-color: #111; color: #fff; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon IFPR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET E GERAL === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #f0f0f0;
+      color: #000;
+      transition: background-color 0.5s, color 0.5s;
+    }
 
-  /* ===== CABEÇALHO POKÉBALL / ULTRA BALL ===== */
-  header {
-    position: relative;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  header h2 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 2.2em;
-    margin: 10px 0;
-    z-index: 10;
-    position: relative;
-  }
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  nav a {
-    text-decoration: none;
-    padding: 8px 18px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-family: 'Fredoka One', cursive;
-    transition: 0.3s;
-    color: inherit;
-    background-color: rgba(255,255,255,0.15);
-  }
-  nav a:hover { transform: scale(1.1); background-color: rgba(255,255,255,0.3); }
+    /* === HEADER - POKÉBALL / ULTRABALL === */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 40px 0 20px;
+    }
 
-  /* ==== BARRA SUPERIOR POKÉBALL / ULTRA BALL ==== */
-  .header {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-  }
+    .pokeball {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #d00000 50%, #fff 50%);
+      border: 4px solid #000;
+      position: relative;
+      transition: all 0.5s;
+    }
 
-  .header .bola {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid #000;
-    background: var(--bola-fundo, linear-gradient(to bottom, #d00000 0%, #d00000 50%, #fff 50%, #fff 100%));
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
+    .pokeball::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #000;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
 
-  .header .bola .linha {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 12px;
-    transform: translateY(-50%);
-    background: repeating-linear-gradient(
-      90deg,
-      var(--linha-preta, #000) 0px,
-      var(--linha-amarela, #F7D02C) 20px,
-      var(--linha-preta, #000) 20px,
-      var(--linha-preta, #000) 40px
-    );
-    border-top: 2px solid var(--linha-preta, #000);
-    border-bottom: 2px solid var(--linha-preta, #000);
-    border-radius: 6px;
-    z-index: 2;
-  }
+    .pokeball::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      background: #fff;
+      border: 4px solid #000;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
 
-  /* ==== CONTEÚDO PRINCIPAL ==== */
-  main {
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    justify-items: center;
-  }
+    .ultraball {
+      background: linear-gradient(to bottom, #000 50%, #fff 50%);
+      border-color: #ffcc00;
+    }
 
-  .bloco-item {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-    width: 200px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 3px solid #fff;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.5s forwards;
-  }
+    /* Listras amarelas da Ultra Ball */
+    .ultraball::before {
+      background: repeating-linear-gradient(
+        90deg,
+        #000,
+        #000 4px,
+        #ffcc00 4px,
+        #ffcc00 8px
+      );
+    }
 
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+    header h2 {
+      margin-top: 10px;
+      font-size: 1.5em;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
 
-  .bloco-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,255,255,0.8);
-  }
+    /* === NAV === */
+    nav {
+      margin-top: 15px;
+    }
 
-  .bloco-item img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    margin-bottom: 8px;
-    transition: transform 0.3s;
-  }
-  .bloco-item:hover img {
-    transform: scale(1.1) rotate(-10deg);
-  }
+    nav a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 15px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-  .pokemon-nome {
-    font-weight: 700;
-    margin-bottom: 6px;
-    font-size: 1.2em;
-  }
+    nav a:hover {
+      background: #ffcc00;
+      color: #000;
+    }
 
-  .tipo-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+    /* === BOTÃO DE TEMA === */
+    #themeButton {
+      margin-top: 15px;
+      padding: 8px 15px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #000;
+      color: #ffcc00;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-  .tipo {
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #fff;
-  }
+    #themeButton:hover {
+      background-color: #333;
+    }
 
-  /* ==== BOTÃO DE MUDAR TEMA ==== */
-  .tema-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 16px;
-    background-color: #000;
-    color: #F7D02C;
-    font-family: 'Fredoka One', cursive;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    z-index: 100;
-    transition: 0.3s;
-  }
-  .tema-toggle:hover { transform: scale(1.05); }
-</style>
+    /* === MAIN / GRID === */
+    main {
+      padding: 20px;
+    }
+
+    #conteudo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+
+    @media (max-width:900px) { #conteudo { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:600px) { #conteudo { grid-template-columns: 1fr; } }
+
+    .bloco-item {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+      width: 250px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      animation: aparecer 0.8s ease forwards;
+    }
+
+    .bloco-item img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .pokemon-nome {
+      font-size: 1em;
+      margin-bottom: 5px;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+
+    .tipo-container {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .tipo {
+      padding: 4px 8px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.8em;
+      font-weight: bold;
+      text-shadow: 0 0 3px rgba(0,0,0,0.5);
+    }
+
+    @keyframes aparecer {
+      from { opacity:0; transform: translateY(20px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+
+    /* === DARK THEME === */
+    body.dark {
+      background-color: #222;
+      color: #fff;
+    }
+
+    body.dark nav a {
+      background: rgba(255,255,0,0.8);
+      color: #000;
+    }
+
+    body.dark nav a:hover {
+      background: #ffcc00;
+      color: #000;
+    }
+
+    body.dark #themeButton {
+      background-color: #ffcc00;
+      color: #000;
+    }
+  </style>
 </head>
-<body class="tema-claro">
+<body>
 
-<button class="tema-toggle">🌙 Dark Mode</button>
+  <header>
+    <div class="pokeball" id="ball"></div>
+    <h2>Pokémon IFPR</h2>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="regioes.html">Regiões</a>
+      <a href="pokedex.html">Pokedex</a>
+      <a href="planilha.html">Pokémons Pesquisados</a>
+    </nav>
+    <button id="themeButton">Mudar Tema</button>
+  </header>
 
-<header class="header">
-  <div class="bola">
-    <div class="linha"></div>
-  </div>
-  <h2>Pokémon IFPR</h2>
-  <nav>
-    <a href="#">Início</a>
-    <a href="#">Regiões</a>
-    <a href="#">Pokedex</a>
-    <a href="#">Pokémons Pesquisados</a>
-  </nav>
-</header>
+  <main>
+    <div id="conteudo">
+      <p>Carregando conteúdo...</p>
+    </div>
+  </main>
 
-<main id="conteudo">
-  <p>Carregando pokémons...</p>
-</main>
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjzUWIXp0VYDd3_kvSDryP014mPqj3FKoWFAgd67TQXmrF0Hsy-QcceLlbDtnMBS_F/exec";
 
-<script>
-const conteudo = document.getElementById("conteudo");
-const btnTema = document.querySelector(".tema-toggle");
-const body = document.body;
-const bola = document.querySelector(".bola");
+    const tiposPokemon = {
+      fogo: { cor: "#EE8130", icone: "🔥" },
+      agua: { cor: "#6390F0", icone: "💧" },
+      planta: { cor: "#7AC74C", icone: "🌿" },
+      eletrico: { cor: "#F7D02C", icone: "⚡" },
+      psiquico: { cor: "#F95587", icone: "🔮" },
+      gelo: { cor: "#96D9D6", icone: "❄️" },
+      dragao: { cor: "#6F35FC", icone: "🐉" },
+      noturno: { cor: "#705746", icone: "🌑" },
+      fada: { cor: "#D685AD", icone: "✨" },
+      lutador: { cor: "#C22E28", icone: "🥊" },
+      venenoso: { cor: "#A33EA1", icone: "☠️" },
+      terrestre: { cor: "#E2BF65", icone: "🌍" },
+      pedra: { cor: "#B6A136", icone: "🪨" },
+      fantasma: { cor: "#735797", icone: "👻" },
+      inseto: { cor: "#A6B91A", icone: "🐛" },
+      aco: { cor: "#B7B7CE", icone: "⚙️" },
+      normal: { cor: "#A8A77A", icone: "⚪" },
+      voador: { cor: "#A98FF3", icone: "🌬️" }
+    };
 
-// Dados dos Pokémons
-const pokemons = [
-  {nome: "Pikachu", imagem: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", tipos: ["Eletrico"]},
-  {nome: "Bulbasaur", imagem: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", tipos: ["Planta","Venenoso"]},
-  {nome: "Charmander", imagem: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", tipos: ["Fogo"]},
-  {nome: "Squirtle", imagem: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", tipos: ["Agua"]}
-];
+    async function carregarConteudo() {
+      const container = document.getElementById('conteudo');
+      container.innerHTML = "<p>Carregando conteúdo...</p>";
 
-// Função para cores de tipos
-function tipoCor(tipo) {
-  const cores = {
-    Fogo: "#EE8130",
-    Agua: "#6390F0",
-    Planta: "#7AC74C",
-    Eletrico: "#F7D02C",
-    Psiquico: "#F95587",
-    Gelo: "#96D9D6",
-    Dragao: "#6F35FC",
-    Noturno: "#705746",
-    Fada: "#D685AD",
-    Lutador: "#C22E28",
-    Venenoso: "#A33EA1",
-    Terrestre: "#E2BF65",
-    Pedra: "#B6A136",
-    Fantasma: "#735797",
-    Inseto: "#A6B91A",
-    Aco: "#B7B7CE",
-    Normal: "#A8A77A",
-    Voador: "#A98FF3"
-  };
-  return cores[tipo] || "#888";
-}
+      try {
+        const res = await fetch(SCRIPT_URL);
+        const dados = await res.json();
+        container.innerHTML = '';
 
-// Função para criar blocos
-function criarBlocoPokemon(p, delay) {
-  const bloco = document.createElement("div");
-  bloco.className = "bloco-item";
-  bloco.style.animationDelay = `${delay}s`;
+        dados.forEach((item, index) => {
+          const bloco = document.createElement('div');
+          bloco.className = 'bloco-item';
+          bloco.style.animationDelay = `${index*0.1}s`;
 
-  const img = document.createElement("img");
-  img.src = p.imagem;
-  img.alt = p.nome;
-  bloco.appendChild(img);
+          let corBorda = "#000";
+          if(item.Tipo){
+            const tipoPrincipal = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
+            corBorda = tiposPokemon[tipoPrincipal]?.cor || "#000";
+          }
+          bloco.style.border = `3px solid ${corBorda}`;
 
-  const nome = document.createElement("div");
-  nome.className = "pokemon-nome";
-  nome.textContent = p.nome;
-  bloco.appendChild(nome);
+          if(item.Url && item.Url.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i)){
+            const img = document.createElement('img');
+            img.src = item.Url;
+            img.alt = item.Título || 'Imagem';
+            bloco.appendChild(img);
+          }
 
-  const tipoContainer = document.createElement("div");
-  tipoContainer.className = "tipo-container";
-  p.tipos.forEach(tipo => {
-    const divTipo = document.createElement("div");
-    divTipo.className = "tipo";
-    divTipo.style.backgroundColor = tipoCor(tipo);
-    divTipo.textContent = tipo;
-    tipoContainer.appendChild(divTipo);
-  });
-  bloco.appendChild(tipoContainer);
+          const nome = document.createElement('div');
+          nome.className = 'pokemon-nome';
+          nome.textContent = item.Título || 'Pokémon';
+          bloco.appendChild(nome);
 
-  return bloco;
-}
+          if(item.Tipo){
+            const tipos = item.Tipo.split(/[\/,]/).map(t => t.trim().toLowerCase());
+            const tipoContainer = document.createElement('div');
+            tipoContainer.className = 'tipo-container';
 
-// Carregar Pokémons com animação em cascata
-function carregarPokemons() {
-  conteudo.innerHTML = "";
-  pokemons.forEach((p, i) => {
-    const bloco = criarBlocoPokemon(p, i * 0.2);
-    conteudo.appendChild(bloco);
-  });
-}
+            tipos.forEach(tipoNome => {
+              const info = tiposPokemon[tipoNome] || { cor:'#888', icone:'❓' };
+              const tipoDiv = document.createElement('div');
+              tipoDiv.className = 'tipo';
+              tipoDiv.style.backgroundColor = info.cor;
+              tipoDiv.innerHTML = `${info.icone} ${tipoNome.charAt(0).toUpperCase() + tipoNome.slice(1)}`;
+              tipoContainer.appendChild(tipoDiv);
+            });
 
-carregarPokemons();
+            bloco.appendChild(tipoContainer);
+          }
 
-// Alternar tema
-btnTema.addEventListener("click", () => {
-  if(body.classList.contains("tema-claro")){
-    body.classList.replace("tema-claro","tema-escuro");
-    bola.style.background = "linear-gradient(to bottom, #000 0%, #000 50%, #fff 50%, #fff 100%)";
-    bola.querySelector(".linha").style.background = "repeating-linear-gradient(90deg, #000 0px, #F7D02C 20px, #000 20px, #000 40px)";
-    btnTema.textContent = "☀️ Light Mode";
-  } else {
-    body.classList.replace("tema-escuro","tema-claro");
-    bola.style.background = "linear-gradient(to bottom, #d00000 0%, #d00000 50%, #fff 50%, #fff 100%)";
-    bola.querySelector(".linha").style.background = "repeating-linear-gradient(90deg, #000 0px, #000 20px, #000 20px, #000 40px)";
-    btnTema.textContent = "🌙 Dark Mode";
-  }
-});
-</script>
+          container.appendChild(bloco);
+        });
+      } catch(err) {
+        container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+      }
+    }
+
+    carregarConteudo();
+
+    // === BOTÃO DE TEMA ===
+    const themeButton = document.getElementById('themeButton');
+    const ball = document.getElementById('ball');
+    themeButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      if(document.body.classList.contains('dark')){
+        ball.classList.add('ultraball');
+      } else {
+        ball.classList.remove('ultraball');
+      }
+    });
+  </script>
 
 </body>
 </html>
