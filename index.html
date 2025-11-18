@@ -10,11 +10,12 @@
 
 <body>
 
-  <!-- FAIXAS TOPO -->
+  <!-- FAIXA DE TOPO EM FORMA DE POKÉBOLA -->
   <header>
-    <div class="faixa-vermelha"></div>
-    <div class="faixa-preta"></div>
+    <div class="pokebola-topo"></div>
+
     <h2>Pokémon IFPR</h2>
+
     <nav>
       <a href="index.html">Início</a>
       <a href="regioes.html">Regiões</a>
@@ -43,22 +44,62 @@
   </footer>
 
   <style>
-    /* === FAIXAS TOPO === */
-    .faixa-vermelha {
-      background-color: #d00000;
-      height: 20px;
+
+    /* === BARRA SUPERIOR EM FORMA DE POKÉBOLA === */
+    .pokebola-topo {
       width: 100%;
+      height: 120px;
+      background: #d00000;
+      position: relative;
+      animation: pokebolaFlutuar 4s ease-in-out infinite;
     }
 
-    .faixa-preta {
-      background-color: #000;
-      height: 20px;
+    /* Faixa preta */
+    .pokebola-topo::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
       width: 100%;
+      height: 24px;
+      background: black;
+    }
+
+    /* Botão central */
+    .pokebola-topo::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      background: white;
+      border: 10px solid black;
+      border-radius: 50%;
+      z-index: 5;
+      animation: botaoPulsar 1.6s ease-in-out infinite;
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes pokebolaFlutuar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    @keyframes botaoPulsar {
+      0%, 100% {
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+        transform: translate(-50%, -50%) scale(1.12);
+      }
     }
 
     header {
-      position: relative;
-      z-index: 10;
       text-align: center;
       color: white;
     }
@@ -93,7 +134,7 @@
     /* === CONTEÚDO PRINCIPAL === */
     main {
       position: relative;
-      z-index: 1; /* Pokémon acima do fundo */
+      z-index: 1;
       padding-top: 40px;
     }
 
@@ -113,15 +154,11 @@
     }
 
     @media (max-width: 900px) {
-      #conteudo {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      #conteudo { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 600px) {
-      #conteudo {
-        grid-template-columns: 1fr;
-      }
+      #conteudo { grid-template-columns: 1fr; }
     }
 
     /* === BLOCO DOS POKÉMONS === */
@@ -207,7 +244,7 @@
       right: 30px;
       width: 240px;
       height: 240px;
-      z-index: 50; /* acima de todos */
+      z-index: 50;
       pointer-events: none;
       animation: flutuar 3s ease-in-out infinite;
     }
