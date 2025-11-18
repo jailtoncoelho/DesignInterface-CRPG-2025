@@ -179,17 +179,17 @@ footer {
 
 /* ---------- TEMA ESCURO ---------- */
 .tema-escuro {
-  background-color: #0f1720;
-  color: #e9eef5;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .tema-escuro header {
-  background-color: #0b1220;
+  background-color:#000000;
 }
 
 .tema-escuro footer {
-  background-color: #0b1220;
-  color: #e9eef5;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .tema-escuro .conteudo-scroll {
