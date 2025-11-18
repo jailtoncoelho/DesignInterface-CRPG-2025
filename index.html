@@ -8,9 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body style="font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);">
+<body style="font-family:'Poppins',sans-serif; background: linear-gradient(to bottom, #1a1a1a, #2b2b2b);">
 
-  <!-- BARRA SUPERIOR (POKÉBOLA) -->
+  <!-- BARRA SUPERIOR COM POKÉBOLA -->
   <header>
     <div class="pokebola-topo">
       <div class="pokebola-superior"></div>
@@ -28,6 +28,8 @@
       <a href="planilha.html">Pokémons Pesquisados</a>
     </nav>
   </header>
+
+
 
   <!-- CONTEÚDO PRINCIPAL -->
   <main>
@@ -47,9 +49,9 @@
 
   <style>
 
-    /* ===========================
+    /* ======================
        POKÉBOLA SUPERIOR
-    ============================ */
+    ======================= */
     .pokebola-topo {
       width: 100%;
       height: 150px;
@@ -72,7 +74,6 @@
       width: 100%;
       position: absolute;
       top: 64px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.4);
       z-index: 3;
     }
 
@@ -94,76 +95,48 @@
       top: 55px;
       left: 50%;
       transform: translateX(-50%);
+      animation: pulsar 1.7s ease-in-out infinite;
       z-index: 10;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
-      animation: pulsar 1.8s ease-in-out infinite;
     }
 
     @keyframes pulsar {
-      0%, 100% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-      }
-      50% {
-        transform: translateX(-50%) scale(1.13);
-        box-shadow: 0 0 22px rgba(255, 255, 255, 1);
-      }
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.12); }
     }
 
     @keyframes flutuarPokebola {
-      0%, 100% { transform: translateY(0); }
+      0%,100% { transform: translateY(0); }
       50% { transform: translateY(6px); }
     }
 
 
-    /* ===========================
-       NAV + TÍTULOS
-    ============================ */
-    header h2 {
-      margin: 10px 0;
-      font-size: 2em;
-      color: white;
-      text-shadow: 0 0 8px rgba(0,0,0,0.8);
-      text-align: center;
-    }
 
+    /* ======================
+       NAV E TÍTULOS
+    ======================= */
     nav {
-      background-color: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       padding: 8px 0;
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(6px);
       text-align: center;
+      backdrop-filter: blur(6px);
     }
 
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
       margin: 0 12px;
       font-weight: 600;
-      transition: color 0.3s;
-      letter-spacing: 0.5px;
     }
 
-    nav a:hover {
-      color: #ffcc00;
-    }
-
-    main {
-      padding-top: 40px;
-      text-align: center;
-    }
-
-    h1, p {
-      color: white;
-      text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    }
+    nav a:hover { color: #ffcc00; }
 
 
-    /* ===========================
-       GRID DE POKÉMON (RESTORED)
-    ============================ */
+
+    /* ======================
+       GRID DE POKÉMON (ORIGINAL)
+    ======================= */
     #conteudo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -172,47 +145,43 @@
       justify-items: center;
     }
 
-    @media (max-width: 900px) {
-      #conteudo {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    @media(max-width:900px) {
+      #conteudo { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 600px) {
-      #conteudo {
-        grid-template-columns: 1fr;
-      }
+    @media(max-width:600px) {
+      #conteudo { grid-template-columns: 1fr; }
     }
 
     .bloco-item {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
       width: 300px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
       animation: aparecer 0.8s ease forwards;
       opacity: 0;
     }
 
     .bloco-item:hover {
       transform: scale(1.07);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 25px rgba(255,255,255,0.8);
     }
 
     @keyframes aparecer {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform: translateY(30px); }
+      to { opacity:1; transform: translateY(0); }
     }
 
     .bloco-item img {
       width: 230px;
       height: 230px;
       object-fit: contain;
-      transition: transform 0.3s;
-      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
+      transition: 0.3s;
     }
 
     .bloco-item:hover img {
@@ -220,11 +189,10 @@
     }
 
     .pokemon-nome {
+      font-size: 1.4em;
       font-weight: bold;
       margin-top: 10px;
-      font-size: 1.4em;
-      color: #fff;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+      color: white;
     }
 
     .tipo-container {
@@ -236,23 +204,13 @@
     }
 
     .tipo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
       padding: 6px 10px;
       border-radius: 12px;
-      color: white;
-      font-size: 1em;
       font-weight: bold;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       color: white;
-      background: rgba(0, 0, 0, 0.5);
     }
 
   </style>
@@ -260,75 +218,80 @@
 
 
 
+  <!-- ======================================================
+       JAVASCRIPT (ORIGINAL COMO ERA)
+  ======================================================= -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
 
     const tiposPokemon = {
-      fogo: { cor: "#EE8130", icone: "🔥" },
-      agua: { cor: "#6390F0", icone: "💧" },
-      planta: { cor: "#7AC74C", icone: "🌿" },
-      eletrico: { cor: "#F7D02C", icone: "⚡" },
-      psiquico: { cor: "#F95587", icone: "🔮" },
-      gelo: { cor: "#96D9D6", icone: "❄️" },
-      dragao: { cor: "#6F35FC", icone: "🐉" },
-      noturno: { cor: "#705746", icone: "🌑" },
-      fada: { cor: "#D685AD", icone: "✨" },
-      lutador: { cor: "#C22E28", icone: "🥊" },
-      venenoso: { cor: "#A33EA1", icone: "☠️" },
-      terrestre: { cor: "#E2BF65", icone: "🌍" },
-      pedra: { cor: "#B6A136", icone: "🪨" },
-      fantasma: { cor: "#735797", icone: "👻" },
-      inseto: { cor: "#A6B91A", icone: "🐛" },
-      aco: { cor: "#B7B7CE", icone: "⚙️" },
-      normal: { cor: "#A8A77A", icone: "⚪" },
-      voador: { cor: "#A98FF3", icone: "🌬️" }
+      fogo:{cor:"#EE8130",icone:"🔥"},
+      agua:{cor:"#6390F0",icone:"💧"},
+      planta:{cor:"#7AC74C",icone:"🌿"},
+      eletrico:{cor:"#F7D02C",icone:"⚡"},
+      psiquico:{cor:"#F95587",icone:"🔮"},
+      gelo:{cor:"#96D9D6",icone:"❄️"},
+      dragao:{cor:"#6F35FC",icone:"🐉"},
+      noturno:{cor:"#705746",icone:"🌑"},
+      fada:{cor:"#D685AD",icone:"✨"},
+      lutador:{cor:"#C22E28",icone:"🥊"},
+      venenoso:{cor:"#A33EA1",icone:"☠️"},
+      terrestre:{cor:"#E2BF65",icone:"🌍"},
+      pedra:{cor:"#B6A136",icone:"🪨"},
+      fantasma:{cor:"#735797",icone:"👻"},
+      inseto:{cor:"#A6B91A",icone:"🐛"},
+      aco:{cor:"#B7B7CE",icone:"⚙️"},
+      normal:{cor:"#A8A77A",icone:"⚪"},
+      voador:{cor:"#A98FF3",icone:"🌬️"}
     };
 
     async function carregarConteudo() {
       const container = document.getElementById('conteudo');
-      container.innerHTML = "<p>Carregando conteúdo...</p>";
+      container.innerHTML = "<p>Carregando...</p>";
 
       try {
         const res = await fetch(SCRIPT_URL);
         const dados = await res.json();
-        container.innerHTML = '';
+        container.innerHTML = "";
 
         dados.forEach(item => {
           const bloco = document.createElement('div');
           bloco.className = 'bloco-item';
 
+          // cor da borda
           let corBorda = "#fff";
           if (item.Tipo) {
             const tipoPrincipal = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
             corBorda = tiposPokemon[tipoPrincipal]?.cor || "#fff";
           }
-
           bloco.style.border = `4px solid ${corBorda}`;
 
-          if (item.Url && item.Url.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i)) {
+          // imagem
+          if (item.Url) {
             const img = document.createElement('img');
             img.src = item.Url;
-            img.alt = item.Título || 'Imagem';
             bloco.appendChild(img);
           }
 
+          // nome
           const nome = document.createElement('div');
           nome.className = 'pokemon-nome';
-          nome.textContent = item.Título || 'Pokémon';
+          nome.textContent = item.Título;
           bloco.appendChild(nome);
 
+          // tipos
           if (item.Tipo) {
             const tipos = item.Tipo.split(/[\/,]/).map(t => t.trim().toLowerCase());
-            const tipoContainer = document.createElement('div');
-            tipoContainer.className = 'tipo-container';
+            const tipoContainer = document.createElement("div");
+            tipoContainer.className = "tipo-container";
 
-            tipos.forEach(tipoNome => {
-              const info = tiposPokemon[tipoNome] || { cor: '#888', icone: '❓' };
-              const tipoDiv = document.createElement('div');
-              tipoDiv.className = 'tipo';
-              tipoDiv.style.backgroundColor = info.cor;
-              tipoDiv.innerHTML = `${info.icone} ${tipoNome.charAt(0).toUpperCase() + tipoNome.slice(1)}`;
-              tipoContainer.appendChild(tipoDiv);
+            tipos.forEach(tipo => {
+              const info = tiposPokemon[tipo] || { cor:"#888", icone:"❓" };
+              const tag = document.createElement("div");
+              tag.className = "tipo";
+              tag.style.backgroundColor = info.cor;
+              tag.innerHTML = `${info.icone} ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+              tipoContainer.appendChild(tag);
             });
 
             bloco.appendChild(tipoContainer);
@@ -336,8 +299,9 @@
 
           container.appendChild(bloco);
         });
-      } catch (err) {
-        container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+
+      } catch (e) {
+        container.innerHTML = "<p>Erro ao carregar.</p>";
       }
     }
 
