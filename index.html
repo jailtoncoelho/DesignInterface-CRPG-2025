@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon IFPR</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <!-- FAIXA DE TOPO EM FORMA DE POKÉBOLA -->
   <header>
-    <div class="pokebola-topo"></div>
+    <div class="pokebola-topo">
+      <div class="parte-branca"></div>
+      <div class="pokebola-botao"></div>
+    </div>
 
     <h2>Pokémon IFPR</h2>
 
@@ -45,34 +47,58 @@
 
   <style>
 
-    /* === BARRA SUPERIOR EM FORMA DE POKÉBOLA === */
+    /* ======================================
+       BARRA SUPERIOR EM FORMA DE POKÉBOLA
+    ====================================== */
     .pokebola-topo {
       width: 100%;
-      height: 120px;
-      background: #d00000;
+      height: 160px;
       position: relative;
+      overflow: hidden;
       animation: pokebolaFlutuar 4s ease-in-out infinite;
+    }
+
+    /* Metade superior (vermelha) */
+    .pokebola-topo::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #d00000;
+      z-index: 1;
     }
 
     /* Faixa preta */
     .pokebola-topo::after {
       content: "";
       position: absolute;
-      top: 50%;
+      top: 80px;
       left: 0;
-      transform: translateY(-50%);
       width: 100%;
       height: 24px;
-      background: black;
+      background: #000;
+      z-index: 3;
     }
 
-    /* Botão central */
-    .pokebola-topo::before {
-      content: "";
+    /* Metade inferior (branca) */
+    .parte-branca {
       position: absolute;
-      top: 50%;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: white;
+      z-index: 1;
+    }
+
+    /* Botão da Pokébola */
+    .pokebola-botao {
+      position: absolute;
+      top: 92px;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       width: 70px;
       height: 70px;
       background: white;
@@ -91,14 +117,17 @@
     @keyframes botaoPulsar {
       0%, 100% {
         box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-        transform: translate(-50%, -50%) scale(1);
+        transform: translateX(-50%) scale(1);
       }
       50% {
         box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
-        transform: translate(-50%, -50%) scale(1.12);
+        transform: translateX(-50%) scale(1.12);
       }
     }
 
+    /* ===============================
+       TÍTULO, NAV E ESTILOS GERAIS
+    =============================== */
     header {
       text-align: center;
       color: white;
@@ -131,7 +160,6 @@
       color: #ffcc00;
     }
 
-    /* === CONTEÚDO PRINCIPAL === */
     main {
       position: relative;
       z-index: 1;
@@ -144,7 +172,9 @@
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     }
 
-    /* === GRADE DE POKÉMON === */
+    /* ===============================
+       GRADE DE POKÉMONS
+    =============================== */
     #conteudo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -161,7 +191,6 @@
       #conteudo { grid-template-columns: 1fr; }
     }
 
-    /* === BLOCO DOS POKÉMONS === */
     .bloco-item {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
@@ -237,7 +266,9 @@
       background: rgba(0, 0, 0, 0.5);
     }
 
-    /* === GIF FLUTUANTE === */
+    /* ===============================
+       GIF CINTHYA FLUTUANTE
+    =============================== */
     .gif-cinthya {
       position: fixed;
       bottom: 30px;
@@ -255,8 +286,6 @@
       border-radius: 16px;
       box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
       transition: transform 0.3s, box-shadow 0.3s;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
       filter: contrast(1.05) saturate(1.1);
     }
 
@@ -265,14 +294,6 @@
       50% { transform: translateY(-12px); }
     }
 
-    @media (max-width: 600px) {
-      .gif-cinthya {
-        width: 180px;
-        height: 180px;
-        bottom: 15px;
-        right: 15px;
-      }
-    }
   </style>
 
   <script>
