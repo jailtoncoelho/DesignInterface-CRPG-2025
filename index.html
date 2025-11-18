@@ -1,43 +1,278 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon IFPR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* ===========================
+       VARIÁVEIS DE CORES
+    ============================ */
+    :root {
+      --cor-botao: #000;
+      --cor-botao-texto: #fff;
+      --cor-fundo: #f0f0f0;
+      --cor-texto: #000;
+    }
+
+    body.tema-escuro {
+      --cor-botao: #000;
+      --cor-botao-texto: #fff;
+      --cor-fundo: #121212;
+      --cor-texto: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background: var(--cor-fundo);
+      color: var(--cor-texto);
+    }
+
+    /* ===========================
+       BARRA SUPERIOR - POKÉBALL / ULTRABALL
+    ============================ */
+    header {
+      position: relative;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .pokebola-topo {
+      position: relative;
+      height: 160px;
+    }
+
+    /* Parte superior */
+    .pokebola-superior {
+      height: 80px;
+      border-bottom-left-radius: 100% 70px;
+      border-bottom-right-radius: 100% 70px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Faixa central */
+    .pokebola-faixa {
+      height: 25px;
+      width: 100%;
+      position: absolute;
+      top: 55px;
+      z-index: 2;
+    }
+
+    /* Parte inferior */
+    .pokebola-inferior {
+      height: 80px;
+      border-top-left-radius: 100% 70px;
+      border-top-right-radius: 100% 70px;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Botão central */
+    .pokebola-botao {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      border: 6px solid;
+      animation: pulsar 1.5s ease-in-out infinite;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    @keyframes pulsar {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.1); }
+    }
+
+    /* ===========================
+       NAV E BOTÕES
+    ============================ */
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--cor-botao-texto);
+      background-color: var(--cor-botao);
+      padding: 12px 20px;
+      margin: 0 8px;
+      border-radius: 8px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+
+    /* ===========================
+       TEMA CLARO (POKEBALL)
+    ============================ */
+    body:not(.tema-escuro) .pokebola-superior { background: #d00000; }
+    body:not(.tema-escuro) .pokebola-faixa { background: black; }
+    body:not(.tema-escuro) .pokebola-inferior { background: white; }
+    body:not(.tema-escuro) .pokebola-botao { 
+      background: white; 
+      border-color: black; 
+    }
+
+    /* ===========================
+       TEMA ESCURO (ULTRABALL)
+    ============================ */
+    body.tema-escuro .pokebola-superior { background: black; }
+    body.tema-escuro .pokebola-faixa { background: #FFD700; }
+    body.tema-escuro .pokebola-inferior { background: white; }
+    body.tema-escuro .pokebola-botao { 
+      background: black; 
+      border-color: #FFD700; 
+    }
+
+    /* ===========================
+       CONTEÚDO PRINCIPAL
+    ============================ */
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    #conteudo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      justify-items: center;
+      margin-top: 30px;
+    }
+
+    @media (max-width:900px){#conteudo{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:600px){#conteudo{grid-template-columns:1fr;}}
+
+    .bloco-item {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 230px;
+      opacity: 0;
+      animation: aparecer 0.8s ease forwards;
+    }
+
+    @keyframes aparecer { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+
+    .bloco-item:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(255,255,255,0.8);
+    }
+
+    .bloco-item img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .bloco-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .pokemon-nome {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 1em;
+      color: var(--cor-texto);
+      text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    .tipo-container {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tipo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      color: white;
+      font-size: 0.8em;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+
+    /* ===========================
+       FOOTER
+    ============================ */
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: var(--cor-texto);
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* ===========================
+       SWITCH DE TEMA
+    ============================ */
+    #botao-tema {
+      margin-top: 15px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Press Start 2P', cursive;
+      cursor: pointer;
+      background-color: var(--cor-botao);
+      color: var(--cor-botao-texto);
+      transition: all 0.3s ease;
+    }
+
+    #botao-tema:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
-
-<body class="tema-claro" style="font-family:'Poppins',sans-serif;">
-
-  <!-- BOTÃO DE TEMA -->
-  <button id="toggleTema" class="botao-tema">🌙</button>
+<body>
 
   <!-- BARRA SUPERIOR -->
   <header>
-    <div class="pokebola-topo" id="pokebolaTopo">
+    <div class="pokebola-topo">
       <div class="pokebola-superior"></div>
       <div class="pokebola-faixa"></div>
       <div class="pokebola-inferior"></div>
       <div class="pokebola-botao"></div>
     </div>
-
     <h2>Pokémon IFPR</h2>
-
     <nav>
       <a href="index.html">Início</a>
       <a href="regioes.html">Regiões</a>
       <a href="pokedex.html">Pokedex</a>
       <a href="planilha.html">Pokémons Pesquisados</a>
     </nav>
+    <button id="botao-tema">Alternar Tema</button>
   </header>
 
-  <!-- CONTEÚDO -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main>
     <h1>Pokémon IFPR</h1>
     <p>"Gotta Catch 'Em All!"</p>
-
-    <div id="conteudo" class="conteudo-scroll">
+    <div id="conteudo">
       <p>Carregando conteúdo...</p>
     </div>
   </main>
@@ -46,264 +281,90 @@
     <p>&copy; 2025 Pokémon IFPR - Todos os direitos reservados.</p>
   </footer>
 
-  <style>
-    /* =========================================
-       BOTÃO DE TEMA
-    ========================================= */
-    .botao-tema {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      border: 2px solid black;
-      border-radius: 50%;
-      font-size: 24px;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      z-index: 999;
-      transition: 0.3s;
-    }
-
-    .tema-escuro .botao-tema {
-      background: black;
-      color: yellow;
-      border-color: yellow;
-    }
-
-    /* =========================================
-       POKÉBOLA / ULTRA BALL
-    ========================================= */
-    .pokebola-topo {
-      width: 100%;
-      height: 150px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pokebola-superior, .pokebola-faixa, .pokebola-inferior, .pokebola-botao {
-      position: absolute;
-      width: 100%;
-    }
-
-    .pokebola-superior { height: 75px; top: 0; }
-    .pokebola-faixa { height: 25px; top: 62px; z-index: 3; }
-    .pokebola-inferior { height: 75px; bottom: 0; }
-
-    .pokebola-botao {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      position: absolute;
-      top: 55px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: pulsar 1.7s ease-in-out infinite;
-      z-index: 10;
-    }
-
-    @keyframes pulsar {
-      0%,100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.12); }
-    }
-
-    /* TEMA CLARO */
-    .tema-claro .pokebola-superior { background: #d00000; }
-    .tema-claro .pokebola-faixa { background: black; }
-    .tema-claro .pokebola-inferior { background: white; }
-    .tema-claro .pokebola-botao { background: white; border: 8px solid black; }
-
-    /* TEMA ESCURO / ULTRA BALL */
-    .tema-escuro .pokebola-superior { background: black; }
-    .tema-escuro .pokebola-faixa { background: yellow; }
-    .tema-escuro .pokebola-inferior { background: white; }
-    .tema-escuro .pokebola-botao { background: black; border: 8px solid yellow; }
-
-    /* =========================================
-       CORES DO TEMA
-    ========================================= */
-    .tema-claro { background: #f0f0f0; color: #111; }
-    .tema-escuro { background: linear-gradient(to bottom, #000814, #001d3d); color: white; }
-
-    /* =========================================
-       NAVIGATION STYLE REFINADO
-    ========================================= */
-    nav {
-      text-align: center;
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    nav a {
-      margin: 0 12px;
-      text-decoration: none;
-      font-family: 'Fredoka One', cursive;
-      font-size: 18px;
-      padding: 12px 22px;
-      border-radius: 25px;
-      display: inline-block;
-      box-shadow: 0 5px 0 #999;
-      transition: 0.3s;
-      position: relative;
-    }
-
-    /* Tema Claro Botões */
-    .tema-claro nav a {
-      background: #ff0000;
-      color: white;
-    }
-    .tema-claro nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px; left: 0; width: 100%; height: 4px;
-      background: #990000;
-      border-radius: 4px;
-    }
-    .tema-claro nav a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 0 #999;
-    }
-
-    /* Tema Escuro Botões */
-    .tema-escuro nav a {
-      background: #000;
-      color: yellow;
-      box-shadow: 0 5px 0 #555;
-    }
-    .tema-escuro nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px; left: 0; width: 100%; height: 4px;
-      background: #ffcc00;
-      border-radius: 4px;
-    }
-    .tema-escuro nav a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 0 #555;
-    }
-
-    /* =========================================
-       GRID DE POKÉMON
-    ========================================= */
-    #conteudo {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      padding: 40px;
-      justify-items: center;
-    }
-    @media(max-width:900px){ #conteudo{ grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:600px){ #conteudo{ grid-template-columns: 1fr; } }
-
-    .bloco-item {
-      width: 280px;
-      padding: 20px;
-      border-radius: 16px;
-      text-align: center;
-      animation: aparecer 0.8s ease forwards;
-      opacity: 0;
-      transition: 0.3s;
-      backdrop-filter: blur(8px);
-    }
-
-    .tema-claro .bloco-item { background: rgba(255,255,255,0.35); box-shadow: 0 0 12px rgba(0,0,0,0.25); }
-    .tema-escuro .bloco-item { background: rgba(0,0,0,0.45); box-shadow: 0 0 12px rgba(255,255,0,0.4); }
-
-    .bloco-item:hover { transform: scale(1.06); }
-
-    .bloco-item img {
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    .tipo-container { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-top:10px; }
-    .tipo { padding:4px 8px; border-radius:6px; font-weight:600; font-size:14px; color:white; }
-
-    @keyframes aparecer { from { transform: translateY(30px); opacity:0; } to { transform: translateY(0); opacity:1; } }
-
-  </style>
-
   <script>
-    /* TROCA DE TEMA */
-    const botaoTema = document.getElementById("toggleTema");
-    const body = document.body;
+    // ======== SWITCH DE TEMA ========
+    const botaoTema = document.getElementById('botao-tema');
+    botaoTema.addEventListener('click', () => {
+      document.body.classList.toggle('tema-escuro');
+    });
 
-    function aplicarTema(tema){
-      body.classList.remove("tema-claro","tema-escuro");
-      body.classList.add(tema);
-      botaoTema.textContent = tema==="tema-claro"?"🌙":"☀️";
-      localStorage.setItem("tema",tema);
-    }
-
-    botaoTema.onclick = ()=> {
-      const novoTema = body.classList.contains("tema-claro")?"tema-escuro":"tema-claro";
-      aplicarTema(novoTema);
+    // ======== TIPOS DE POKÉMON ========
+    const tiposPokemon = {
+      fogo: { cor: "#EE8130", icone: "🔥" },
+      agua: { cor: "#6390F0", icone: "💧" },
+      planta: { cor: "#7AC74C", icone: "🌿" },
+      eletrico: { cor: "#F7D02C", icone: "⚡" },
+      psiquico: { cor: "#F95587", icone: "🔮" },
+      gelo: { cor: "#96D9D6", icone: "❄️" },
+      dragao: { cor: "#6F35FC", icone: "🐉" },
+      noturno: { cor: "#705746", icone: "🌑" },
+      fada: { cor: "#D685AD", icone: "✨" },
+      lutador: { cor: "#C22E28", icone: "🥊" },
+      venenoso: { cor: "#A33EA1", icone: "☠️" },
+      terrestre: { cor: "#E2BF65", icone: "🌍" },
+      pedra: { cor: "#B6A136", icone: "🪨" },
+      fantasma: { cor: "#735797", icone: "👻" },
+      inseto: { cor: "#A6B91A", icone: "🐛" },
+      aco: { cor: "#B7B7CE", icone: "⚙️" },
+      normal: { cor: "#A8A77A", icone: "⚪" },
+      voador: { cor: "#A98FF3", icone: "🌬️" }
     };
 
-    aplicarTema(localStorage.getItem("tema") || "tema-claro");
-
-    /* CARREGAR POKÉMONS */
+    // ======== CARREGAR POKÉMONS ========
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzohiPhWabHPixQ-NvMlpNzbXy_QDvlYUDysw6qn4e5bMMalOVMhNOarOmOQWaVQecr/exec";
 
-    const tiposPokemon = {
-      fogo:{cor:"#EE8130",icone:"🔥"}, agua:{cor:"#6390F0",icone:"💧"}, planta:{cor:"#7AC74C",icone:"🌿"},
-      eletrico:{cor:"#F7D02C",icone:"⚡"}, psiquico:{cor:"#F95587",icone:"🔮"}, gelo:{cor:"#96D9D6",icone:"❄️"},
-      dragao:{cor:"#6F35FC",icone:"🐉"}, noturno:{cor:"#705746",icone:"🌑"}, fada:{cor:"#D685AD",icone:"✨"},
-      lutador:{cor:"#C22E28",icone:"🥊"}, venenoso:{cor:"#A33EA1",icone:"☠️"}, terrestre:{cor:"#E2BF65",icone:"🌍"},
-      pedra:{cor:"#B6A136",icone:"🪨"}, fantasma:{cor:"#735797",icone:"👻"}, inseto:{cor:"#A6B91A",icone:"🐛"},
-      aco:{cor:"#B7B7CE",icone:"⚙️"}, normal:{cor:"#A8A77A",icone:"⚪"}, voador:{cor:"#A98FF3",icone:"🌬️"}
-    };
-
-    async function carregarConteudo(){
+    async function carregarConteudo() {
       const container = document.getElementById('conteudo');
-      container.innerHTML="<p>Carregando conteúdo...</p>";
-      try{
+      container.innerHTML = "<p>Carregando conteúdo...</p>";
+      try {
         const res = await fetch(SCRIPT_URL);
         const dados = await res.json();
-        container.innerHTML="";
-        dados.forEach(item=>{
-          const bloco = document.createElement('div');
-          bloco.className='bloco-item';
-          let corBorda="#fff";
-          if(item.Tipo){
-            const tp=item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
-            corBorda=tiposPokemon[tp]?.cor||"#fff";
-          }
-          bloco.style.border=`4px solid ${corBorda}`;
+        container.innerHTML = '';
 
-          if(item.Url){
+        dados.forEach((item, index) => {
+          const bloco = document.createElement('div');
+          bloco.className = 'bloco-item';
+          bloco.style.animationDelay = `${index * 0.1}s`;
+
+          let corBorda = "#fff";
+          if(item.Tipo){
+            const tipoPrincipal = item.Tipo.split(/[\/,]/)[0].trim().toLowerCase();
+            corBorda = tiposPokemon[tipoPrincipal]?.cor || "#fff";
+          }
+          bloco.style.border = `4px solid ${corBorda}`;
+
+          if(item.Url && item.Url.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i)){
             const img = document.createElement('img');
-            img.src=item.Url;
+            img.src = item.Url;
+            img.alt = item.Título || 'Imagem';
             bloco.appendChild(img);
           }
 
           const nome = document.createElement('div');
-          nome.className='pokemon-nome';
-          nome.textContent=item.Título;
+          nome.className = 'pokemon-nome';
+          nome.textContent = item.Título || 'Pokémon';
           bloco.appendChild(nome);
 
           if(item.Tipo){
-            const tiposDiv=document.createElement("div");
-            tiposDiv.className="tipo-container";
-            item.Tipo.split(/[\/,]/).map(t=>t.trim().toLowerCase()).forEach(tipo=>{
-              const info=tiposPokemon[tipo]||{cor:"#999",icone:"❓"};
-              const el=document.createElement("div");
-              el.className="tipo";
-              el.style.backgroundColor=info.cor;
-              el.innerHTML=`${info.icone} ${tipo}`;
-              tiposDiv.appendChild(el);
+            const tipos = item.Tipo.split(/[\/,]/).map(t => t.trim().toLowerCase());
+            const tipoContainer = document.createElement('div');
+            tipoContainer.className = 'tipo-container';
+            tipos.forEach(tipoNome => {
+              const info = tiposPokemon[tipoNome] || { cor:'#888', icone:'❓' };
+              const tipoDiv = document.createElement('div');
+              tipoDiv.className = 'tipo';
+              tipoDiv.style.backgroundColor = info.cor;
+              tipoDiv.innerHTML = `${info.icone} ${tipoNome.charAt(0).toUpperCase() + tipoNome.slice(1)}`;
+              tipoContainer.appendChild(tipoDiv);
             });
-            bloco.appendChild(tiposDiv);
+            bloco.appendChild(tipoContainer);
           }
 
           container.appendChild(bloco);
         });
-      }catch(err){
-        container.innerHTML="<p>Erro ao carregar.</p>";
+
+      } catch(err) {
+        container.innerHTML = "<p>Erro ao carregar dados: "+err.message+"</p>";
       }
     }
 
