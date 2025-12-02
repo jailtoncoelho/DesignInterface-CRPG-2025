@@ -1,85 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Registros da Planilha</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilha - Pokémon IFPR</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
+<body class="classic-theme">
 
-<body>
-    <header>
-        <h2>Pokémon IFPR</h2>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="regioes.html">Regiões</a>
-            <a href="pokedex.html">Pokedex</a>
-            <a href="planilha.html" aria-current="page">Planilha</a>
-        </nav>
-    </header>
+<button class="theme-toggle" id="themeToggle">Tema Elite</button>
 
-    <main>
-        <h1>Registros do Formulário</h1>
-        <div id="mensagem" class="info-msg">Carregando...</div>
-        <div class="table-wrap" id="table-wrap"></div>
-    </main>
+<header>
+  <h2>Pokémons Pesquisados</h2>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="regioes.html">Regiões</a>
+    <a href="pokedex.html">Pokedex</a>
+    <a href="planilha.html">Pokémons Pesquisados</a>
+  </nav>
+</header>
 
-    <footer>
-        <p>&copy; 2025 Locadora IFPR</p>
-    </footer>
+<main id="conteudo">
+  <p>Carregando planilha...</p>
+</main>
 
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmmMlvXuiveMQhudjI8iWelm9_A7K1suPIShe8ElEhcN-nMm1R8W8Mh75r3iap6sEV/exec"; // substitua pela sua URL
+<img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cynthia" class="gif-cynthia">
 
-        async function carregar() {
-            const msg = document.getElementById('mensagem');
-            const wrap = document.getElementById('table-wrap');
-            msg.textContent = 'Carregando dados...';
-            wrap.innerHTML = '';
-
-            try {
-                const res = await fetch(SCRIPT_URL);
-                const dados = await res.json();
-
-                if (!dados.length) {
-                    msg.textContent = 'Nenhum registro encontrado.';
-                    return;
-                }
-
-                msg.textContent = '';
-                const table = document.createElement('table');
-                table.className = 'dados-planilha';
-
-                const thead = document.createElement('thead');
-                const trh = document.createElement('tr');
-                Object.keys(dados[0]).forEach(h => {
-                    const th = document.createElement('th');
-                    th.textContent = h;
-                    trh.appendChild(th);
-                });
-                thead.appendChild(trh);
-                table.appendChild(thead);
-
-                const tbody = document.createElement('tbody');
-                dados.forEach(obj => {
-                    const tr = document.createElement('tr');
-                    Object.values(obj).forEach(v => {
-                        const td = document.createElement('td');
-                        td.textContent = v;
-                        tr.appendChild(td);
-                    });
-                    tbody.appendChild(tr);
-                });
-                table.appendChild(tbody);
-                wrap.appendChild(table);
-            } catch (err) {
-                msg.textContent = 'Erro ao carregar: ' + err.message;
-            }
-        }
-
-        carregar();
-    </script>
+<script src="script.js"></script>
 </body>
-
 </html>
