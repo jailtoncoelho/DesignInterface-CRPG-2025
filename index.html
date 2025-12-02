@@ -5,7 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pokémon IFPR</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== Reset e fontes ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+  body { min-height: 100vh; transition: background-color 0.5s, color 0.5s; }
+  
+  /* ===== Temas ===== */
+  body.classic-theme {
+    --bg-top: #d32f2f;
+    --bg-bottom: #ffffff;
+    --primary: #ffeb3b;
+    --card-border: #000;
+    --text-color: #000;
+  }
+
+  body.elite-theme {
+    --bg-top: #000;
+    --bg-bottom: #1c1c1c;
+    --primary: gold;
+    --card-border: gold;
+    --text-color: #fff;
+  }
+
+  /* ===== Header ===== */
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
+  }
+  header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2em;
+    margin: 10px 0;
+    color: var(--text-color);
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  nav a {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: 'Fredoka One', cursive;
+    transition: 0.3s;
+    color: var(--text-color);
+    background-color: rgba(255,255,255,0.15);
+  }
+  nav a:hover { transform: scale(1.1); background-color: rgba(255,255,255,0.3); }
+
+  /* ===== Pokémon cards ===== */
+  main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    justify-items: center;
+  }
+
+  .pokemon-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    width: 220px;
+    transition: transform 0.3s, box-shadow 0.5s, border-color 0.5s;
+    border: 3px solid var(--card-border);
+    color: var(--text-color);
+  }
+
+  .pokemon-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px var(--primary);
+  }
+
+  .pokemon-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
+
+  .pokemon-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 1.2em;
+  }
+
+  .tipo-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tipo {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  /* ===== Botão de Tema ===== */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    background-color: var(--primary);
+    color: var(--bg-bottom);
+    font-family: 'Fredoka One', cursive;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.5s;
+  }
+
+  /* ===== GIF flutuante da Cynthia ===== */
+  .gif-cynthia {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 240px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(255,0,0,0.6);
+    animation: flutuar 3s ease-in-out infinite, brilhoPokebola 4s infinite linear;
+    cursor: pointer;
+    z-index: 50;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .gif-cynthia:hover {
+    transform: scale(1.12) rotate(2deg);
+    box-shadow: 0 0 35px rgba(255,255,255,0.9);
+  }
+
+  @keyframes flutuar {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes brilhoPokebola {
+    0% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(255,0,0,0.4); }
+    100% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); }
+  }
+</style>
 </head>
 <body class="classic-theme">
 
@@ -14,10 +165,10 @@
 <header>
   <h2>Pokémon IFPR</h2>
   <nav>
-    <a href="index.html">Início</a>
-    <a href="regioes.html">Regiões</a>
-    <a href="pokedex.html">Pokedex</a>
-    <a href="planilha.html">Pokémons Pesquisados</a>
+    <a href="#">Início</a>
+    <a href="#">Regiões</a>
+    <a href="#">Pokedex</a>
+    <a href="#">Pokémons Pesquisados</a>
   </nav>
 </header>
 
@@ -27,6 +178,78 @@
 
 <img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cynthia" class="gif-cynthia">
 
-<script src="script.js"></script>
+<script>
+const conteudo = document.getElementById("conteudo");
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
+
+// Alternar tema
+themeToggle.addEventListener("click", () => {
+  if(body.classList.contains("classic-theme")) {
+    body.classList.replace("classic-theme","elite-theme");
+    themeToggle.innerText = "Tema Clássico";
+  } else {
+    body.classList.replace("elite-theme","classic-theme");
+    themeToggle.innerText = "Tema Elite";
+  }
+});
+
+// Cores dos tipos
+const tipoCor = {
+  fogo:"#EE8130", agua:"#6390F0", planta:"#7AC74C", eletrico:"#F7D02C",
+  psiquico:"#F95587", gelo:"#96D9D6", dragao:"#6F35FC", noturno:"#705746",
+  fada:"#D685AD", lutador:"#C22E28", venenoso:"#A33EA1", terrestre:"#E2BF65",
+  pedra:"#B6A136", fantasma:"#735797", inseto:"#A6B91A", aco:"#B7B7CE",
+  normal:"#A8A77A", voador:"#A98FF3"
+};
+
+// Função criar bloco de Pokémon
+function criarBloco(p) {
+  const card = document.createElement("div");
+  card.className = "pokemon-card";
+
+  const img = document.createElement("img");
+  img.src = p.Url || p.imagem;
+  img.alt = p.Título || p.nome;
+  card.appendChild(img);
+
+  const nome = document.createElement("div");
+  nome.className = "pokemon-name";
+  nome.textContent = p.Título || p.nome;
+  card.appendChild(nome);
+
+  const tipos = document.createElement("div");
+  tipos.className = "tipo-container";
+
+  const arrTipos = (p.Tipo || p.tipos || []).map(t=>t.trim());
+  arrTipos.forEach(t=>{
+    const tDiv = document.createElement("div");
+    tDiv.className = "tipo";
+    tDiv.textContent = t;
+    tDiv.style.backgroundColor = tipoCor[t.toLowerCase()] || "#888";
+    tipos.appendChild(tDiv);
+  });
+  card.appendChild(tipos);
+
+  return card;
+}
+
+// Carregar pokémons da planilha
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLPSBXa7tcdenbYsvMGnCh32RkMqoKXbx7kevFKSbgp7cNEbqELukheNOjgJaUhPjj/exec";
+
+async function carregarPokemons() {
+  conteudo.innerHTML = "Carregando pokémons...";
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const dados = await res.json();
+    conteudo.innerHTML = "";
+    dados.forEach(p => conteudo.appendChild(criarBloco(p)));
+  } catch(err) {
+    conteudo.innerHTML = "Erro ao carregar pokémons: " + err.message;
+  }
+}
+
+carregarPokemons();
+</script>
 </body>
 </html>
