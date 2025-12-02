@@ -1,356 +1,255 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pokémon IFPR — Pokédex</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg1: linear-gradient(180deg,#071421 0%, #0b2230 100%);
-      --glass: rgba(255,255,255,0.06);
-      --accent: #d00000;
-      --text: #ffffff;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Roboto',sans-serif;background:var(--bg1);color:var(--text);-webkit-font-smoothing:antialiased}
-    /* --- top stripes (pokéball theme) --- */
-    .top-stripe{height:20px;background:#d00000}
-    .top-black{height:20px;background:#000}
-    /* --- header --- */
-    header{position:relative;padding:14px 16px 8px;text-align:center;z-index:30}
-    .brand{display:flex;align-items:center;gap:12px;justify-content:center}
-    .brand h1{font-family:'Fredoka One',cursive;font-size:26px;margin:0;color:var(--text);text-shadow:0 6px 18px rgba(0,0,0,.6)}
-    /* --- pokeball (interactive) --- */
-    .pokebola-container{position:fixed;right:22px;top:22px;z-index:220;width:92px;height:92px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .28s}
-    .pokebola-container img{width:100%;height:100%;transition:transform .3s,filter .25s;filter:drop-shadow(0 8px 20px rgba(0,0,0,.6))}
-    .pokebola-container:hover{transform:translateY(-4px)}
-    .pokebola.evolving{animation:spin .5s linear}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon IFPR</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Reset e fontes ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+  body { min-height: 100vh; transition: background-color 0.5s, color 0.5s; }
+  
+  /* ===== Temas ===== */
+  body.classic-theme {
+    --bg-top: #d32f2f;
+    --bg-bottom: #ffffff;
+    --primary: #ffeb3b;
+    --card-border: #000;
+    --text-color: #000;
+  }
 
-    /* --- main / layout --- */
-    main{position:relative;z-index:50;max-width:1200px;margin:0 auto;padding:26px 18px 70px}
-    .hero{text-align:center;margin-bottom:16px}
-    .hero h2{font-family:'Fredoka One',cursive;margin:0 0 6px;font-size:20px}
-    .hero p{margin:0;color:#cedfe8;opacity:.95}
+  body.elite-theme {
+    --bg-top: #000;
+    --bg-bottom: #1c1c1c;
+    --primary: gold;
+    --card-border: gold;
+    --text-color: #fff;
+  }
 
-    /* --- grid --- */
-    #conteudo{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;justify-items:center}
-    @media(max-width:980px){#conteudo{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){#conteudo{grid-template-columns:1fr;padding:0 10px}}
+  /* ===== Header ===== */
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
+  }
+  header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2em;
+    margin: 10px 0;
+    color: var(--text-color);
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  nav a {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: 'Fredoka One', cursive;
+    transition: 0.3s;
+    color: var(--text-color);
+    background-color: rgba(255,255,255,0.15);
+  }
+  nav a:hover { transform: scale(1.1); background-color: rgba(255,255,255,0.3); }
 
-    .card{width:320px;max-width:95%;padding:14px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));box-shadow:0 10px 30px rgba(0,0,0,.55);transition:transform .28s,box-shadow .28s;border:4px solid rgba(255,255,255,0.05)}
-    .card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 48px rgba(0,0,0,.7)}
-    .img-wrap{height:240px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02);border-radius:10px;padding:6px}
-    .img-wrap img{max-width:220px;max-height:220px;object-fit:contain;filter:drop-shadow(0 10px 26px rgba(0,0,0,.6));transition:transform .18s}
-    .card:hover .img-wrap img{transform:scale(1.04)}
-    .name{font-weight:800;font-size:1.22rem;text-align:center;margin-top:10px}
-    .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .type{padding:6px 10px;border-radius:12px;color:#fff;font-weight:700;font-size:.95rem;box-shadow:0 6px 18px rgba(0,0,0,.38)}
-    .desc{margin-top:10px;font-size:.95rem;color:rgba(255,255,255,.9);text-align:center}
+  /* ===== Pokémon cards ===== */
+  main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    justify-items: center;
+  }
 
-    /* loading/error */
-    .loading{display:flex;align-items:center;justify-content:center;gap:12px;padding:40px;color:#bfe9ff}
-    .err{color:#ffb3b3;padding:18px;text-align:center}
+  .pokemon-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    width: 220px;
+    transition: transform 0.3s, box-shadow 0.5s, border-color 0.5s;
+    border: 3px solid var(--card-border);
+    color: var(--text-color);
+  }
 
-    /* --- Cynthia background (Option A) --- */
-    .cynthia-bg{
-      position:fixed;
-      inset:0;
-      z-index:10;
-      pointer-events:none;
-      display:block;
-    }
-    .cynthia-bg::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: url("https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif") center top / cover no-repeat;
-      filter:brightness(.45) blur(4px) saturate(.95);
-      opacity:.95;
-      transform:translateZ(0);
-      z-index:11;
-      mix-blend-mode:normal;
-    }
-    /* top overlay stripes should stay above bg */
-    .top-overlay{position:relative;z-index:30}
+  .pokemon-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px var(--primary);
+  }
 
-    /* --- Modal (pokéball) --- */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.5);z-index:260}
-    .modal.open{display:grid}
-    .modal-card{width:360px;padding:18px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03));backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,0.12);text-align:center}
-    .modal-card h3{margin:0 0 8px;font-family:'Fredoka One',cursive}
-    .modal-btn{display:block;width:78%;margin:10px auto;padding:10px 14px;border-radius:10px;border:none;background:#ff5b5b;color:#fff;font-weight:700;cursor:pointer}
-    .modal-close{background:#666;margin-top:6px}
+  .pokemon-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
 
-    /* --- theme variants (classic vs elite) --- */
-    /* default = classic */
-    body.theme-classic{
-      --bg1: linear-gradient(180deg,#071421 0%, #0b2230 100%);
-      --accent: #d00000;
-      --card-border: rgba(255,255,255,0.06);
-    }
-    /* elite (Cynthia-inspired) */
-    body.theme-elite{
-      --bg1: linear-gradient(180deg,#040306 0%, #0b070a 100%);
-      --accent: linear-gradient(90deg,#ffbd4b,#ffd86b);
-      --card-border: rgba(255,215,120,0.12);
-    }
-    /* accent helpers */
-    .accent-strong { color:var(--accent); }
-    /* small footer */
-    footer{margin-top:28px;padding:18px;text-align:center;color:#bcdbe6;opacity:.9}
-    /* theme toggle control */
-    .theme-controls{position:fixed;left:22px;top:18px;z-index:230;display:flex;gap:8px}
-    .theme-controls button{padding:8px 12px;border-radius:10px;border:none;background:rgba(255,255,255,0.06);color:#fff;cursor:pointer;font-weight:700}
-    .theme-controls button.active{background:var(--accent);color:#000}
-  </style>
+  .pokemon-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 1.2em;
+  }
+
+  .tipo-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tipo {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  /* ===== Botão de Tema ===== */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    background-color: var(--primary);
+    color: var(--bg-bottom);
+    font-family: 'Fredoka One', cursive;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.5s;
+  }
+
+  /* ===== GIF flutuante da Cynthia ===== */
+  .gif-cynthia {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 240px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(255,0,0,0.6);
+    animation: flutuar 3s ease-in-out infinite, brilhoPokebola 4s infinite linear;
+    cursor: pointer;
+    z-index: 50;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .gif-cynthia:hover {
+    transform: scale(1.12) rotate(2deg);
+    box-shadow: 0 0 35px rgba(255,255,255,0.9);
+  }
+
+  @keyframes flutuar {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes brilhoPokebola {
+    0% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(255,0,0,0.4); }
+    100% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); }
+  }
+</style>
 </head>
-<body class="theme-classic">
+<body class="classic-theme">
 
-  <!-- Cynthia background (Option A) -->
-  <div class="cynthia-bg" aria-hidden="true"></div>
+<button class="theme-toggle" id="themeToggle">Tema Elite</button>
 
-  <!-- top stripes (above background)-->
-  <div class="top-overlay">
-    <div class="top-stripe"></div>
-    <div class="top-black"></div>
-  </div>
+<header>
+  <h2>Pokémon IFPR</h2>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Regiões</a>
+    <a href="#">Pokedex</a>
+    <a href="#">Pokémons Pesquisados</a>
+  </nav>
+</header>
 
-  <!-- Theme controls & pokeball -->
-  <div class="theme-controls" aria-hidden="false">
-    <button id="btnClassic" class="active">Classic</button>
-    <button id="btnElite">Elite</button>
-  </div>
+<main id="conteudo">
+  <p>Carregando pokémons...</p>
+</main>
 
-  <div class="pokebola-container" title="Clique: abrir menu · Duplo clique: evoluir">
-    <img id="pokebola" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokébola">
-  </div>
-
-  <header>
-    <div class="brand"><h1>Pokémon IFPR</h1></div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h2>Sua Pokédex</h2>
-      <p>Os Pokémons são carregados diretamente da sua planilha — confira abaixo.</p>
-    </section>
-
-    <div id="conteudo">
-      <div id="loading" class="loading">Carregando pokémons da planilha…</div>
-    </div>
-
-    <footer>© 2025 Pokémon IFPR</footer>
-  </main>
-
-  <!-- modal -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <h3>Menu Pokébola</h3>
-      <button class="modal-btn" data-action="pokedex">Pokedex completa</button>
-      <button class="modal-btn" data-action="regioes">Mapa de regiões</button>
-      <button class="modal-btn" data-action="pesquisados">Pokémons pesquisados</button>
-      <button id="modalClose" class="modal-btn modal-close">Fechar</button>
-    </div>
-  </div>
+<img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cynthia" class="gif-cynthia">
 
 <script>
-/* ========== Config ========== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLPSBXa7tcdenbYsvMGnCh32RkMqoKXbx7kevFKSbgp7cNEbqELukheNOjgJaUhPjj/exec";
+const conteudo = document.getElementById("conteudo");
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
 
-/* Tipo map (cores e ícones) */
-const tiposMap = {
-  fogo:{cor:"#EE8130",icone:"🔥"}, agua:{cor:"#6390F0",icone:"💧"}, planta:{cor:"#7AC74C",icone:"🌿"},
-  eletrico:{cor:"#F7D02C",icone:"⚡"}, psiquico:{cor:"#F95587",icone:"🔮"}, gelo:{cor:"#96D9D6",icone:"❄️"},
-  dragao:{cor:"#6F35FC",icone:"🐉"}, noturno:{cor:"#705746",icone:"🌑"}, fada:{cor:"#D685AD",icone:"✨"},
-  lutador:{cor:"#C22E28",icone:"🥊"}, venenoso:{cor:"#A33EA1",icone:"☠️"}, terrestre:{cor:"#E2BF65",icone:"🌍"},
-  pedra:{cor:"#B6A136",icone:"🪨"}, fantasma:{cor:"#735797",icone:"👻"}, inseto:{cor:"#A6B91A",icone:"🐛"},
-  aco:{cor:"#B7B7CE",icone:"⚙️"}, normal:{cor:"#A8A77A",icone:"⚪"}, voador:{cor:"#A98FF3",icone:"🌬️"}
+// Alternar tema
+themeToggle.addEventListener("click", () => {
+  if(body.classList.contains("classic-theme")) {
+    body.classList.replace("classic-theme","elite-theme");
+    themeToggle.innerText = "Tema Clássico";
+  } else {
+    body.classList.replace("elite-theme","classic-theme");
+    themeToggle.innerText = "Tema Elite";
+  }
+});
+
+// Cores dos tipos
+const tipoCor = {
+  fogo:"#EE8130", agua:"#6390F0", planta:"#7AC74C", eletrico:"#F7D02C",
+  psiquico:"#F95587", gelo:"#96D9D6", dragao:"#6F35FC", noturno:"#705746",
+  fada:"#D685AD", lutador:"#C22E28", venenoso:"#A33EA1", terrestre:"#E2BF65",
+  pedra:"#B6A136", fantasma:"#735797", inseto:"#A6B91A", aco:"#B7B7CE",
+  normal:"#A8A77A", voador:"#A98FF3"
 };
 
-/* DOM */
-const container = document.getElementById('conteudo');
-const loading = document.getElementById('loading');
+// Função criar bloco de Pokémon
+function criarBloco(p) {
+  const card = document.createElement("div");
+  card.className = "pokemon-card";
 
-/* helper to tolerate many header names */
-function pick(item, names){
-  for(const n of names){
-    if(n in item) return item[n];
-    const low = n.toLowerCase();
-    for(const k in item){
-      if(k.toLowerCase() === low) return item[k];
-    }
-  }
-  return undefined;
-}
+  const img = document.createElement("img");
+  img.src = p.Url || p.imagem;
+  img.alt = p.Título || p.nome;
+  card.appendChild(img);
 
-/* create single card */
-function createCard(row, idx){
-  const title = pick(row, ['Título','Titulo','nome','Nome','Name','Pokemon','Pokémon']) || `Pokémon ${idx+1}`;
-  const url   = pick(row, ['Url','URL','Image','Imagem','Sprite','Foto','FotoUrl']) || '';
-  const tipo  = pick(row, ['Tipo','tipo','Type','Types','Classe','Element']) || '';
-  const desc  = pick(row, ['Descrição','Descricao','Desc','Description','Bio','Notes']) || '';
+  const nome = document.createElement("div");
+  nome.className = "pokemon-name";
+  nome.textContent = p.Título || p.nome;
+  card.appendChild(nome);
 
-  const card = document.createElement('article');
-  card.className = 'card';
+  const tipos = document.createElement("div");
+  tipos.className = "tipo-container";
 
-  let mainType = '';
-  if(typeof tipo === 'string' && tipo.trim()) mainType = tipo.split(/[\/,;|]/)[0].trim().toLowerCase();
-  const borderColor = (tiposMap[mainType] && tiposMap[mainType].cor) ? tiposMap[mainType].cor : 'rgba(255,255,255,0.06)';
-  card.style.borderColor = borderColor;
-
-  // image
-  const imgWrap = document.createElement('div');
-  imgWrap.className = 'img-wrap';
-  const img = document.createElement('img');
-  img.alt = title;
-  if(url && /^https?:\/\//i.test(url)) img.src = url;
-  else {
-    // fallback: try to use PokeAPI official artwork by name (best-effort), else pokeball placeholder
-    const nameForUrl = title.toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    // We avoid an expensive lookup; use placeholder sprite for safety
-    img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png';
-  }
-  imgWrap.appendChild(img);
-  card.appendChild(imgWrap);
-
-  // title
-  const nameEl = document.createElement('div');
-  nameEl.className = 'name';
-  nameEl.textContent = title;
-  card.appendChild(nameEl);
-
-  // types
-  if(tipo){
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    const parts = (typeof tipo === 'string') ? tipo.split(/[\/,;|]/).map(t=>t.trim()).filter(Boolean) : (Array.isArray(tipo) ? tipo : []);
-    parts.forEach(pt=>{
-      const key = pt.toLowerCase();
-      const info = tiposMap[key] || {cor:'#888',icone:''};
-      const el = document.createElement('div');
-      el.className = 'type';
-      el.style.backgroundColor = info.cor;
-      el.textContent = `${info.icone} ${pt}`;
-      meta.appendChild(el);
-    });
-    card.appendChild(meta);
-  }
-
-  // description
-  if(desc){
-    const d = document.createElement('div');
-    d.className = 'desc';
-    d.textContent = desc;
-    card.appendChild(d);
-  }
+  const arrTipos = (p.Tipo || p.tipos || []).map(t=>t.trim());
+  arrTipos.forEach(t=>{
+    const tDiv = document.createElement("div");
+    tDiv.className = "tipo";
+    tDiv.textContent = t;
+    tDiv.style.backgroundColor = tipoCor[t.toLowerCase()] || "#888";
+    tipos.appendChild(tDiv);
+  });
+  card.appendChild(tipos);
 
   return card;
 }
 
-/* load sheet */
-async function loadSheet(){
-  loading.style.display = 'flex';
-  try{
-    const res = await fetch(SCRIPT_URL, {cache:'no-store'});
-    if(!res.ok) throw new Error('Resposta com status '+res.status);
-    const data = await res.json();
-    if(!Array.isArray(data) || data.length === 0){
-      container.innerHTML = '<div class="err">Planilha vazia ou formato inválido. Verifique o script.</div>';
-      return;
-    }
-    container.innerHTML = '';
-    data.forEach((row, i)=> container.appendChild(createCard(row, i)));
-  }catch(err){
-    console.error(err);
-    container.innerHTML = '<div class="err">Erro ao carregar a planilha: '+err.message+'</div>';
-  }finally{
-    loading.style.display = 'none';
-  }
-}
-loadSheet();
+// Carregar pokémons da planilha
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLPSBXa7tcdenbYsvMGnCh32RkMqoKXbx7kevFKSbgp7cNEbqELukheNOjgJaUhPjj/exec";
 
-/* ========== Pokébola interactive + modal + evolution ========== */
-const pokebolaEl = document.getElementById('pokebola');
-const modal = document.getElementById('modal');
-const modalClose = document.getElementById('modalClose');
-const modalBtns = document.querySelectorAll('.modal-btn');
-
-const pokebolas = [
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png",
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png"
-];
-const brilho = ["#ff4b4b","#1E90FF","#FFD700","#C000FF"];
-let indicePokebola = 0;
-
-// click = open modal
-document.querySelector('.pokebola-container').addEventListener('click',(e)=>{
-  // prevent dblclick fire from opening twice (dblclick also triggers click)
-  if(e.detail === 1){
-    setTimeout(()=>{
-      if(e.detail === 1){
-        modal.classList.add('open');
-      }
-    }, 160);
-  }
-});
-
-// dblclick = evolve
-document.querySelector('.pokebola-container').addEventListener('dblclick', (e)=>{
-  indicePokebola = (indicePokebola + 1) % pokebolas.length;
-  pokebolaEl.src = pokebolas[indicePokebola];
-  pokebolaEl.style.filter = `drop-shadow(0 0 18px ${brilho[indicePokebola]})`;
-  pokebolaEl.classList.add('evolving');
-  setTimeout(()=> pokebolaEl.classList.remove('evolving'), 480);
-});
-
-// modal close handlers
-document.addEventListener('click',(ev)=>{
-  // close modal if click outside and modal open
-  if(modal.classList.contains('open') && ev.target === modal) modal.classList.remove('open');
-});
-modalClose?.addEventListener('click', ()=> modal.classList.remove('open'));
-modalBtns.forEach(b=>{
-  b.addEventListener('click',(ev)=>{
-    const act = ev.currentTarget.dataset.action;
-    modal.classList.remove('open');
-    if(act === 'pokedex') alert('Abrir Pokedex completa (implemente navegação).');
-    if(act === 'regioes') alert('Abrir mapa de regiões (implemente navegação).');
-    if(act === 'pesquisados') alert('Abrir Pokémons pesquisados (implemente navegação).');
-  });
-});
-
-/* ========== Theme switching (Classic / Elite) ========== */
-const btnClassic = document.getElementById('btnClassic');
-const btnElite = document.getElementById('btnElite');
-
-function setTheme(theme){
-  if(theme === 'classic'){
-    document.body.classList.remove('theme-elite');
-    document.body.classList.add('theme-classic');
-    btnClassic.classList.add('active'); btnElite.classList.remove('active');
-    // restore classic accents
-    document.querySelectorAll('.card').forEach(c=> c.style.borderColor = c.style.borderColor || 'rgba(255,255,255,0.06)');
-  } else {
-    document.body.classList.remove('theme-classic');
-    document.body.classList.add('theme-elite');
-    btnElite.classList.add('active'); btnClassic.classList.remove('active');
-    // gently tint card borders to gold-ish if not set by type
-    document.querySelectorAll('.card').forEach(c=>{
-      if(!c.style.borderColor || c.style.borderColor === 'rgba(255,255,255,0.06)') c.style.borderColor = 'rgba(255,215,120,0.12)';
-    });
+async function carregarPokemons() {
+  conteudo.innerHTML = "Carregando pokémons...";
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const dados = await res.json();
+    conteudo.innerHTML = "";
+    dados.forEach(p => conteudo.appendChild(criarBloco(p)));
+  } catch(err) {
+    conteudo.innerHTML = "Erro ao carregar pokémons: " + err.message;
   }
 }
 
-btnClassic.addEventListener('click', ()=> setTheme('classic'));
-btnElite.addEventListener('click', ()=> setTheme('elite'));
-
-/* initial */
-setTheme('classic');
-
+carregarPokemons();
 </script>
 </body>
 </html>
