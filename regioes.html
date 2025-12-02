@@ -1,187 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Escolha de Inicial</title>
-    <style>
-        /* Estilo geral da página */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #C10000;
-            color: white;
-            padding: 15px 20px;
-        }
-
-        header h2 {
-            margin: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        /* Container das regiões com altura fixa e scroll */
-        .regioes {
-            height: 100vh; /* altura total da viewport */
-            overflow-y: auto; /* barra de scroll vertical */
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-sizing: border-box;
-            background-color: #f0f0f0;
-        }
-
-        /* Cada região com altura fixa e estilo */
-        .regiao {
-            height: 150px; /* altura ajustada para dar mais espaço ao banner */
-            background-color: white;
-            border: 1px solid #333;
-            margin-bottom: 10px;
-            padding: 15px;
-            box-sizing: border-box;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .regiao h2 {
-            margin: 0 0 8px 0;
-            font-size: 1.3rem;
-            color: #fff; /* Texto das regiões em branco para contraste com o banner */
-            z-index: 1;
-        }
-
-        .regiao p {
-            margin: 0;
-            font-size: 1rem;
-            color: #fff; /* Texto das regiões em branco para contraste com o banner */
-            z-index: 1;
-        }
-
-        /* Banner (imagem) com opacidade e posicionamento abaixo do conteúdo */
-        .regiao img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5; /* Banner com 50% de opacidade */
-            z-index: 0; /* Coloca a imagem abaixo do texto */
-        }
-
-        /* Links dentro de .regiao */
-        .regiao a {
-            position: relative;
-            z-index: 2; /* Garante que o link fique acima do banner */
-            color: #fff; /* Cor do link */
-            text-decoration: none;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 12px 20px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-            font-size: 0.9rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regiões - Pokémon IFPR</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
+<body class="classic-theme">
 
-<body>
-    <!-- Cabeçalho -->
-    <header>
-        <h2>Pokémon IFPR</h2>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="regioes.html">Regiões</a>
-            <a href="pokedex.html">Pokedex</a>
-            <a href="planilha.html"> Pokemons Pesquisados</a>
-        </nav>
-    </header>
+<button class="theme-toggle" id="themeToggle">Tema Elite</button>
 
-    <!-- Conteúdo principal -->
-    <main>
-        <h1>Todas as Regiões</h1>
-        <div class="regioes">
-            <div class="regiao">
-                <img src="https://i.pinimg.com/736x/de/a7/54/dea7549a11c4e36a64906b9334710fe9.jpg" alt="Banner de Kanto">
-                <h2><a href="https://pokemon.fandom.com/wiki/Kanto">Região de Kanto</a></h2>
-                <p>1° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/38/36/22/383622059edf18ad86cc78c359e59bdf.jpg" alt="Banner de Johto">
-                <h2><a href="https://pokemon.fandom.com/wiki/Johto">Região de Johto</a></h2>
-                <p>2° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/60/54/36/6054366a67464872d6b114ee888a43bb.jpg" alt="Banner de Hoenn">
-                <h2><a href="https://pokemon.fandom.com/wiki/Hoenn">Região de Hoenn</a></h2>
-                <p>3° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/39/ba/cf/39bacfce62f70ae61656239f76e70c6e.jpg" alt="Banner de Sinnoh">
-                <h2><a href="https://pokemon.fandom.com/wiki/Sinnoh">Região de Sinnoh</a></h2>
-                <p>4° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/ea/80/ec/ea80ec3bad8a0485f6b51c5a08e0bb72.jpg" alt="Banner de Unova">
-                <h2><a href="https://pokemon.fandom.com/wiki/Unova">Região de Unova</a></h2>
-                <p>5° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/736x/34/2a/e2/342ae2d2460d299c5a9e77e10a2dc14e.jpg" alt="Banner de Kalos">
-                <h2><a href="https://pokemon.fandom.com/wiki/Kalos">Região de Kalos</a></h2>
-                <p>6° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/bd/81/98/bd819890487a8a6c3a7863a2c69c3188.jpg" alt="Banner de Alola">
-                <h2><a href="https://pokemon.fandom.com/wiki/Alola">Região de Alola</a></h2>
-                <p>7° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/5f/22/3b/5f223badf72a1256a78c5323f7229ff4.jpg" alt="Banner de Galar">
-                <h2><a href="https://pokemon.fandom.com/wiki/Galar">Região de Galar</a></h2>
-                <p>8° Geração</p>
-            </div>
-            <div class="regiao">
-                <img src="https://i.pinimg.com/1200x/7b/6f/f8/7b6ff84c3470062bc52cd70396a5ec8b.jpg" alt="Banner de Paldea">
-                <h2><a href="https://pokemon.fandom.com/wiki/Paldea">Região de Paldea</a></h2>
-                <p>9° Geração</p>
-            </div>
-        </div>
-    </main>
+<header>
+  <h2>Pokémon IFPR - Regiões</h2>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="regioes.html">Regiões</a>
+    <a href="pokedex.html">Pokedex</a>
+    <a href="planilha.html">Pokémons Pesquisados</a>
+  </nav>
+</header>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 Pokemon IFPR - Todos os direitos dos Pokemon!</p>
-    </footer>
+<main id="conteudo">
+  <p>Carregando regiões...</p>
+</main>
+
+<img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cynthia" class="gif-cynthia">
+
+<script src="script.js"></script>
 </body>
-
 </html>
