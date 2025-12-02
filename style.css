@@ -1,144 +1,107 @@
-/* Estilo geral */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, arcade-classic;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #FFFFFF, #FFFFFF);
-    color: #0a0a0a;
-    text-align: center;
+/* Reset e fontes */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+body { min-height: 100vh; transition: background-color 0.5s, color 0.5s; }
+
+/* ===== Temas ===== */
+body.classic-theme {
+  --bg-top: #d32f2f;
+  --bg-bottom: #ffffff;
+  --primary: #ffeb3b;
+  --card-border: #000;
+  --text-color: #000;
 }
 
-/* Cabeçalho mais moderno */
-header {
-    background: linear-gradient(135deg, #FF2424, #A00000);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+body.elite-theme {
+  --bg-top: #000;
+  --bg-bottom: #1c1c1c;
+  --primary: gold;
+  --card-border: gold;
+  --text-color: #fff;
 }
 
-header h2 {
-    margin: 0;
-    font-size: 2em;
-    letter-spacing: 2px;
+/* ===== Header ===== */
+header { text-align: center; margin-bottom: 30px; position: relative; z-index: 10; }
+header h2 { font-family: 'Fredoka One', cursive; font-size: 2.2em; margin: 10px 0; color: var(--text-color); }
+nav { display: flex; justify-content: center; gap: 16px; margin-bottom: 20px; }
+nav a {
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: 'Fredoka One', cursive;
+  transition: 0.3s;
+  color: var(--text-color);
+  background-color: rgba(255,255,255,0.15);
 }
+nav a:hover { transform: scale(1.1); background-color: rgba(255,255,255,0.3); }
 
-header nav {
-    margin-top: 10px;
-}
-
-header nav a {
-    display: inline-block;
-    color: #FFFFFF;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-header nav a:hover {
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-/* Conteúdo principal */
+/* ===== Pokémon cards ===== */
 main {
-    padding: 20px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  justify-items: center;
 }
 
-main h1 {
-    color: #FFFFFF;
+.pokemon-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 15px;
+  text-align: center;
+  width: 220px;
+  transition: transform 0.3s, box-shadow 0.5s, border-color 0.5s;
+  border: 3px solid var(--card-border);
+  color: var(--text-color);
+}
+.pokemon-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px var(--primary);
+}
+.pokemon-card img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.pokemon-name { font-weight: 700; margin-bottom: 6px; font-size: 1.2em; }
+.tipo-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
+.tipo { padding: 4px 8px; border-radius: 8px; font-size: 0.9em; font-weight: bold; color: #fff; }
+
+/* ===== Botão de Tema ===== */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background-color: var(--primary);
+  color: var(--bg-bottom);
+  font-family: 'Fredoka One', cursive;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.5s;
 }
 
-/* Rodapé */
-footer {
-    background: linear-gradient(135deg, #000000, #251F1F);
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #FFFFFF;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+/* ===== GIF flutuante da Cynthia ===== */
+.gif-cynthia {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 240px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
+  animation: flutuar 3s ease-in-out infinite, brilhoPokebola 4s infinite linear;
+  cursor: pointer;
+  z-index: 50;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-
-/* Galeria de carros */
-.pokemon {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.pokemon img {
-    width: 200px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.pokemon img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}
-.regioes {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.regiao {
-    background: linear-gradient(135deg, #9e9b9b, #ffffff);
-    border-radius: 12px;
-    padding: 20px;
-    width: 250px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.regiao:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}
-
-.pokedex-form {
-    max-width: 400px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: left;
-}
-
-.pokedex-form label {
-    font-weight: bold;
-    color: #0d47a1;
-}
-
-.pokedex-form input,
-.pokedex-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.pokedex-form button {
-    background: #0d47a1;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.pokedex-form button:hover {
-    background: #1976d2;
+.gif-cynthia:hover { transform: scale(1.12) rotate(2deg); box-shadow: 0 0 35px rgba(255,255,255,0.9); }
+@keyframes flutuar { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes brilhoPokebola { 
+  0% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); } 
+  50% { box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(255,0,0,0.4); } 
+  100% { box-shadow: 0 0 25px rgba(255,0,0,0.6), 0 0 50px rgba(255,255,255,0.4); } 
 }
