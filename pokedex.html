@@ -1,67 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon IFPR - Pokedex</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokédex - Pokémon IFPR</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
+<body class="classic-theme">
 
-<body>
+<button class="theme-toggle" id="themeToggle">Tema Elite</button>
 
-    <!-- Cabeçalho -->
-    <header>
-        <h2>Pokémon IFPR</h2>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="regioes.html">Regiões</a>
-            <a href="pokedex.html">Pokedex</a>
-            <a href="planilha.html"> Pokemons Pesquisados</a>
-        </nav>
-    </header>
+<header>
+  <h2>Pokédex IFPR</h2>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="regioes.html">Regiões</a>
+    <a href="pokedex.html">Pokedex</a>
+    <a href="planilha.html">Pokémons Pesquisados</a>
+  </nav>
+</header>
 
-    <!-- Conteúdo principal -->
-    <main>
-        <h1>Busca pelo Pokémon</h1>
-        <form class="contato-form" action="https://script.google.com/macros/s/AKfycbwM_dTarvA-uBOuYMH5XD3vUfaozq6yvySdGwT2gIx-VlTJ1MHX3plFravgh0DZm5st/exec" method="POST" onsubmit="return redirecionarPokedex(event)">
-            <label for="pokemon">Nome:</label>
-            <input type="text" id="pokemon" name="pokemon" placeholder="Digite o nome do Pokémon desejado" required>
+<main id="conteudo">
+  <p>Carregando Pokédex...</p>
+</main>
 
-            <button type="submit">Enviar</button>
-        </form>
-    </main>
+<img src="https://media1.tenor.com/m/BjI5K2TSw98AAAAd/cinthya-pokemon.gif" alt="Cynthia" class="gif-cynthia">
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 Pokémon IFPR - Todos os direitos dos Pokémon</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // Função para redirecionar após o envio do formulário
-        function redirecionarPokedex(event) {
-            // Impede o envio tradicional do formulário (somente se for necessário fazer algo antes)
-            event.preventDefault();
-
-            // Captura o nome do Pokémon digitado
-            const nomePokemon = document.getElementById('pokemon').value.trim().toLowerCase();
-
-            // Verifica se o nome foi preenchido
-            if (nomePokemon) {
-                // Envia o formulário para o Google Sheets
-                event.target.submit();
-
-                // Redireciona para a página da Pokédex após o envio
-                setTimeout(() => {
-                    window.location.href = `https://www.pokemon.com/br/pokedex/${nomePokemon}`;
-                }, 500); // Pequeno delay para garantir que o formulário foi enviado
-            } else {
-                alert("Por favor, insira o nome de um Pokémon.");
-            }
-        }
-    </script>
-
+<script src="script.js"></script>
 </body>
-
 </html>
